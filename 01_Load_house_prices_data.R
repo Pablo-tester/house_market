@@ -42,3 +42,15 @@ Average_price <- Average_house_price %>%
                  select(Date = x1, 
                         Average_price = uk_average_house_price)
 Average_price
+
+# Convert required numeric columns as numeric 
+# 1-2 for the Price change file 
+# This will turn the variable into double as required (double)
+Price_change[,2] <- as.numeric(Price_change$Price_change)
+Price_change
+
+
+# 2-2 for the Annual change price
+# This will turn the variable into double as required (double)
+Average_price[,2] <- as.numeric(Average_price$Average_price)
+Average_price
