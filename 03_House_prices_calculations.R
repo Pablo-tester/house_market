@@ -53,6 +53,7 @@ MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, colo
        subtitle = "UK MoM and YoY percent price change",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
+       subtitle = "UK MoM and YoY percent price change") +
   theme_bw()
 MoM_perc_change
 
@@ -79,3 +80,4 @@ Cycles <- Price_change_year %>%
                 Trend = ifelse(percent - lag(percent,1) <0,"decrease","increase")
               )
 Cycles
+
