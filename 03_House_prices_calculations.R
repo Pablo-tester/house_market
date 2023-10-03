@@ -50,10 +50,34 @@ Price_changel
 MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
+       subtitle = "UK MoM and YoY percent price change",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
        subtitle = "UK MoM and YoY percent price change") +
   theme_bw()
 MoM_perc_change
 
 ggsave(paste0("plots/01_UK_MoM_and_YoY_percent_price_change.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
-# Include year 
+# Include year to facet by year
+library(lubridate)
+
+Price_change_year <- Price_changel %>% 
+                     mutate(
+                       year = year(datef),
+                       month = month(datef))  
+Price_change_year
+
+
+# 5. Identify Expansive and contraction house prices periods
+
+# 5.1 Setup a rule: 
+# If YoY percent change (lag 1) is lower that (YoY current percent change) tag = "Increse" otherwise "decrease"
+
+Cycles <- Price_change_year %>% 
+              filter(metric == "YoY_perc") %>% 
+              mutate(
+                Trend = ifelse(percent - lag(percent,1) <0,"decrease","increase")
+              )
+Cycles
+
