@@ -52,8 +52,7 @@ MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, colo
   labs(title ="UK Average house prices into reverse from last year all time high",
        subtitle = "UK MoM and YoY percent price change",
        # Change X and Y axis labels
-       x = "Year", y = "House price change (%)" ) +
-       subtitle = "UK MoM and YoY percent price change") +
+       x = "Year", y = "House price change (%)" ) 
   theme_bw()
 MoM_perc_change
 
