@@ -37,13 +37,39 @@ yoy_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, colo
   theme_bw()
 yoy_perc_change
 
+# 5. Create plot including both MoM and YoY percent change chart
+House_price_change_my <- House_price %>% select(datef,YoY_perc_change = YoY_percr,
+                                                MoM_perc_change = MoM_percr)
+House_price_change_my
 
-# 5. Include annotations in the chart
+# 5.1 transform data from wide into long
+# Using privot_longer() from dplyr package
+Price_changel_my <- House_price_change_my %>% 
+  pivot_longer(cols = !datef,
+               names_to = "metric",values_to = "percent")
+Price_changel_my
+
+yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent, color = metric )) + 
+  geom_line() +
+  labs(title ="UK Average house prices into reverse from last year all time high, July 2023 data.",
+       subtitle = "UK YoY and MoM percent price change",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  theme_bw()
+yoy_perc_change_my
+
+ggsave(paste0("plots/02_UK_MoM_and_YoY_percent_price_change_JULY2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+
+
+
+
+# 6. Include annotations in the chart
 
 # Include a shadowed area:
 # https://ggplot2.tidyverse.org/reference/annotate.html
 
-# 5.1 Include a Horizontal line
+# 6.1 Include a Horizontal line
 yoy_annotations <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
@@ -54,7 +80,7 @@ yoy_annotations <-ggplot(data = Price_changel, aes( x = datef, y = percent, colo
   theme_bw()
 yoy_annotations
 
-# 5.2 Include a vertical reference line
+# 6.2 Include a vertical reference line
 
 # Try as.numeric(mydata$datefield[120]):
 # https://stackoverflow.com/questions/5388832/how-to-get-a-vertical-geom-vline-to-an-x-axis-of-class-date
