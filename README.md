@@ -13,3 +13,10 @@ Using Pablo-tester account build some charts and analysis of the Housing market 
 5. Output a Quarto report highlighting the main findings in the house market data downloaded from ONS website.
 
 All this analysis will be done in a dedicated R project using Git and GitHub for version control, adding new analytical features as new branches to main using my local repo as Pablo-tester. 
+
+
+### Using trunk development to develop features
+
+In this project I use trunk-based development to add features to the main branch. Pablo-tester GitHub account creates the features and  Pablo-source GitHub accounts reviews and approves the changes applied.
+
+
