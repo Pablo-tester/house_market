@@ -20,3 +20,10 @@ All this analysis will be done in a dedicated R project using Git and GitHub for
 In this project I use trunk-based development to add features to the main branch. Pablo-tester GitHub account creates the features and  Pablo-source GitHub accounts reviews and approves the changes applied.
 
 
+## 1. Exploratory data analysis 
+
+### 1.1 Average house price change (%)
+
+Year on year and month on month UK Average house price change are approaching negative rates in July 2023.
+
+![02_UK_MoM_and_YoY_percent_price_change_JULY2023](https://github.com/Pablo-tester/house_market/assets/140793883/31d15001-195a-4554-95f5-7c70420e2f14)
