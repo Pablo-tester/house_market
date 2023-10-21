@@ -13,6 +13,8 @@ files
 # [2] "data/Figure_2__The_average_UK_house_price_was_£286,000_in_May_2023_(provisional_estimate).xls"
 # 1 sheet(s) found.
 
+# 1-2 Annual Price change 
+
 # Load in first "Annual price change" .xls file
 Annual_change_house_price <- read_excel(here("data","Figure_1__Average_UK_house_price_annual_change_was_0.6%_in_the_12_months_to_July_2023_(provisional_estimate).xls"), 
                                         sheet = 1,
@@ -28,6 +30,13 @@ Price_change <- Annual_change_house_price %>%
                         Price_change = x12_month_percentage_change)
 Price_change
 
+
+# Convert required numeric columns as numeric 
+# This will turn the variable into double as required (double)
+Price_change[,2] <- as.numeric(Price_change$Price_change)
+Price_change
+
+# 2-2 Annual average house price
 # Load in second "Average house price" .xls file
 Average_house_price <- read_excel(here("data", "Figure_2__The_average_UK_house_price_was_£286,000_in_May_2023_(provisional_estimate).xls"), 
                                   sheet = 1,
@@ -42,14 +51,6 @@ Average_price <- Average_house_price %>%
                         Average_price = uk_average_house_price)
 Average_price
 
-# Convert required numeric columns as numeric 
-# 1-2 for the Price change file 
-# This will turn the variable into double as required (double)
-Price_change[,2] <- as.numeric(Price_change$Price_change)
-Price_change
-
-
-# 2-2 for the Annual change price
 # This will turn the variable into double as required (double)
 Average_price[,2] <- as.numeric(Average_price$Average_price)
 Average_price
