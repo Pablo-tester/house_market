@@ -61,9 +61,6 @@ yoy_perc_change_my
 ggsave(paste0("plots/02_UK_MoM_and_YoY_percent_price_change_JULY2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
 
-
-
-
 # 6. Include annotations in the chart
 
 # Include a shadowed area:

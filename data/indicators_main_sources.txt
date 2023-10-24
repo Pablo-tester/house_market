@@ -2,6 +2,10 @@
 
 ## ONS
 - House prices
+> UK House Price Index Statistical bulletins
+https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/previousReleases
+Latest release: UK House Price Index: August 2023
+
 - Inflation
 
 ## BOE

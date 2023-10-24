@@ -45,7 +45,15 @@ Price_changel <- House_price_change %>%
                               names_to = "metric",values_to = "percent")
 Price_changel
 
+tail(Price_changel)
+
 # 4. Plot price MoM and YoY price change over time
+Latest_data <- Price_changel %>% 
+               mutate(Max_Date = max(datef)) %>% 
+               mutate(Latest_month = ifelse(datef==Max_Date,1,0))
+Latest_data
+
+tail(Latest_data)
 
 MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
