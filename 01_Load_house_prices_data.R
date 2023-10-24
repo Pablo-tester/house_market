@@ -16,7 +16,7 @@ files
 # 1-2 Annual Price change 
 
 # Load in first "Annual price change" .xls file
-Annual_change_house_price <- read_excel(here("data","Figure_1__Average_UK_house_price_annual_change_was_0.6%_in_the_12_months_to_July_2023_(provisional_estimate).xls"), 
+Annual_change_house_price <- read_excel(here("data","Figure_1__Average_UK_house_price_annual_change_was_0.2%_in_the_12_months_to_August_2023_(provisional_estimate).xls"), 
                                         sheet = 1,
                                         skip = 6) %>% 
                              clean_names()
