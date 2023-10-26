@@ -18,8 +18,13 @@ All this analysis will be done in a dedicated R project using Git and GitHub for
 ### Using trunk development to develop features
 
 In this project I use trunk-based development to add features to the main branch. Pablo-tester GitHub account creates the features and  Pablo-source GitHub accounts reviews and approves the changes applied.
+![Git_commit_branch_ahead](https://github.com/Pablo-tester/house_market/assets/140793883/532ed3d0-1bae-435c-b1ac-26dbe3a42303)
+
+Adding chages from Git to GitHub
 
 ![Close_issue_from_terminal](https://github.com/Pablo-tester/house_market/assets/140793883/3f86debc-e58e-4ca1-afd2-091cc9149fec)
+
+Closing issues as I push the fix, referencing issue number in commit message
 
 ## 1. Exploratory data analysis 
 
