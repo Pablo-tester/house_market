@@ -1,6 +1,7 @@
 # 04_House_price_change_plots
 
 library(tidyverse)
+library(here)
 
 House_price <- Average_priced %>%  
   mutate(
@@ -64,6 +65,10 @@ yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent
 yoy_perc_change_my
 
 ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_AUG2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+# Write Price_changel_my data set (Long format) into a .csv file: 
+
+write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_AUG23.csv"), row.names = TRUE)
 
 
 # 6. Include annotations in the chart
