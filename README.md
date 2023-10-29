@@ -15,7 +15,7 @@ Using Pablo-tester account build some charts and analysis of the Housing market 
 All this analysis will be done in a dedicated R project using Git and GitHub for version control, adding new analytical features as new branches to main using my local repo as Pablo-tester. 
 
 
-### Using trunk development to develop features
+### Using trunk development to add new features
 
 In this project I use trunk-based development to add features to the main branch. Pablo-tester GitHub account creates the features and  Pablo-source GitHub accounts reviews and approves the changes applied.
 ![Git_commit_branch_ahead](https://github.com/Pablo-tester/house_market/assets/140793883/532ed3d0-1bae-435c-b1ac-26dbe3a42303)
