@@ -34,6 +34,10 @@ House_price <- Average_priced %>%
                )
 House_price 
 
+# Check start end Average house price time series
+head(House_price)
+tail(House_price)
+
 # 3. Subset data for MoM and YoY prrice change and turn long into wider format
 House_price_change <- House_price %>% select(datef,MoM_perc = MoM_percr,YoY_perc = YoY_percr)
 House_price_change
@@ -58,7 +62,7 @@ tail(Latest_data)
 MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
-       subtitle = "UK MoM and YoY percent price change",
+       subtitle = "UK MoM and YoY percent price change. Latest data August 2023",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) 
   theme_bw()

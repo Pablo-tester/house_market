@@ -35,11 +35,14 @@ ggsave(paste0("plots/Annual_house_price_change_percent.jpeg"),width = 30, height
 
 
 # 2-2 Annual average house price
+# August price data
+# Year (Date, 5,8)
+# Month (Date, 1,3)
 Average_priced <- Average_price %>% 
   select(Date,Average_price) %>% 
   mutate(
-    Year = substring(Date,1,4),
-    Month = substring(Date,6,8),
+    Year = substring(Date,5,8),
+    Month = substring(Date,1,3),
     Day = 01,
     date = paste0(Year,"/",Month,"/",Day)
   ) %>% 
@@ -49,11 +52,15 @@ Average_priced
 Average_priced <- Average_priced %>% select(datef,Avg_price = Average_price)
 Average_priced
 
+# Check start end Average house price time series
+head(Average_priced)
+tail(Average_priced)
+
 
 # Plot average house prices
 AVG_HPRICE <-ggplot(data = Average_priced, aes( x = datef, y = Avg_price)) + 
   geom_line(color="dodgerblue") +
-  labs(title ="UK Average house price in England 2005-2023",
+  labs(title ="UK Average house price in England 2005-2023. Latest data August 2023",
        subtitle = "Average house price in pounds") +
   theme_bw()
 AVG_HPRICE
