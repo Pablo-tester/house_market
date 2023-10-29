@@ -1,6 +1,7 @@
 # 04_House_price_change_plots
 
 library(tidyverse)
+library(here)
 
 House_price <- Average_priced %>%  
   mutate(
@@ -49,16 +50,25 @@ Price_changel_my <- House_price_change_my %>%
                names_to = "metric",values_to = "percent")
 Price_changel_my
 
+# Check start end Average house price time series
+head(Price_changel_my)
+tail(Price_changel_my)
+
+
 yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
-  labs(title ="UK Average house prices into reverse from last year all time high, July 2023 data.",
+  labs(title ="UK Average house prices into reverse from last year all time high, August 2023 data.",
        subtitle = "UK YoY and MoM percent price change",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
   theme_bw()
 yoy_perc_change_my
 
-ggsave(paste0("plots/02_UK_MoM_and_YoY_percent_price_change_JULY2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_AUG2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+# Write Price_changel_my data set (Long format) into a .csv file: 
+
+write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_AUG23.csv"), row.names = TRUE)
 
 
 # 6. Include annotations in the chart

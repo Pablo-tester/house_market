@@ -38,7 +38,9 @@ Price_change
 
 # 2-2 Annual average house price
 # Load in second "Average house price" .xls file
-Average_house_price <- read_excel(here("data", "Figure_2__The_average_UK_house_price_was_£286,000_in_May_2023_(provisional_estimate).xls"), 
+#   Latest average house price data (Figure 2 ONS Annual House prices website AUGUST 2023)
+#   Figure_2__The_average_UK_house_price_was_£291,000_in_August_2023_(provisional_estimate).xls
+Average_house_price <- read_excel(here("data", "Figure_2__The_average_UK_house_price_was_£291,000_in_August_2023_(provisional_estimate).xls"), 
                                   sheet = 1,
                                   skip = 6) %>% 
                        clean_names()
@@ -54,3 +56,6 @@ Average_price
 # This will turn the variable into double as required (double)
 Average_price[,2] <- as.numeric(Average_price$Average_price)
 Average_price
+
+head(Average_price)
+tail(Average_price)
