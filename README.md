@@ -1,6 +1,12 @@
 # house_market
 House prices data analysis and visualisations 
 
+House market data source:  ONS. UK House Price Index.
+
+Latest data release: UK House Price Index: August 2023
+Monthly house price inflation in the UK, calculated using data from HM Land Registry, Registers of Scotland, and Land and Property Services Northern Ireland.
+<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023>
+
 ## Aim
 Using Pablo-tester account build some charts and analysis of the Housing market using R Git and GitHub
 
