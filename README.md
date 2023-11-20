@@ -39,3 +39,12 @@ Closing issues as I push the fix, referencing issue number in commit message
 Year on year and month on month UK Average house price change are approaching negative rates in August 2023.
 
 ![03_UK_MoM_and_YoY_percent_price_change_AUG2023](https://github.com/Pablo-tester/house_market/assets/140793883/d72e2be5-fbd6-416c-918e-82199b599223)
+
+
+## 2. Univariate TS modelling using TSstudio
+
+We will explore how to create, train and compare several TS univariate models using TSstudio, using UK Average House price data.
+
+The TSstudio package provides a set of tools descriptive and predictive analysis of time series data. That includes utility functions for preprocessing time series data, interactive visualization functions based on the plotly package engine, and set of tools for training and evaluating time series forecasting models from the forecast, forecastHybrid, and bsts packages.
+
+TSstudio: <https://ramikrispin.github.io/TSstudio/>
