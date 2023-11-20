@@ -36,9 +36,10 @@ Closing issues as I push the fix, referencing issue number in commit message
 
 ### 1.1 Average house price change (%)
 
-Year on year and month on month UK Average house price change are approaching negative rates in August 2023.
+Year on year and month on month UK Average house price change show negative rates for first time in September 2023 since 2011.
 
-![03_UK_MoM_and_YoY_percent_price_change_AUG2023](https://github.com/Pablo-tester/house_market/assets/140793883/d72e2be5-fbd6-416c-918e-82199b599223)
+![03_UK_MoM_and_YoY_percent_price_change_SEP2023](https://github.com/Pablo-tester/house_market/assets/76554081/9edc5d11-101b-4c5a-9d74-a82146ad1116)
+
 
 
 ## 2. Univariate TS modelling using TSstudio
