@@ -16,7 +16,8 @@ files
 # 1-2 Annual Price change 
 
 # Load in first "Annual price change" .xls file
-Annual_change_house_price <- read_excel(here("data","Figure_1__Average_UK_house_price_annual_change_was_0.2%_in_the_12_months_to_August_2023_(provisional_estimate).xls"), 
+# Latest published month: SEP2023
+Annual_change_house_price <- read_excel(here("data","Figure_1__Average_UK_house_prices_were_little_changed_in_the_12_months_to_September_2023_(provisional_estimate)_.xls"), 
                                         sheet = 1,
                                         skip = 6) %>% 
                              clean_names()
@@ -38,9 +39,8 @@ Price_change
 
 # 2-2 Annual average house price
 # Load in second "Average house price" .xls file
-#   Latest average house price data (Figure 2 ONS Annual House prices website AUGUST 2023)
-#   Figure_2__The_average_UK_house_price_was_£291,000_in_August_2023_(provisional_estimate).xls
-Average_house_price <- read_excel(here("data", "Figure_2__The_average_UK_house_price_was_£291,000_in_August_2023_(provisional_estimate).xls"), 
+# Latest published month: SEP2023
+Average_house_price <- read_excel(here("data", "Figure_2__The_average_UK_house_price_was_£291,000_in_September_2023_(provisional_estimate).xls"), 
                                   sheet = 1,
                                   skip = 6) %>% 
                        clean_names()
