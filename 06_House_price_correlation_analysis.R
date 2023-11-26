@@ -4,6 +4,7 @@ source('01_Load_house_prices_data.R')
 source('02_House_data_EDA.R')
 source('03_House_prices_calculations.R')
 source('04_House_price_change_plots.R')
+source('05_House_price_TS_EDA.R')
 
 # Then we run a correlation analysis.
 # On TS object: House_price_ts
