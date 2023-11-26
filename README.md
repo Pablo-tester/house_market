@@ -36,6 +36,13 @@ Closing issues as I push the fix, referencing issue number in commit message
 
 ### 1.1 Average house price change (%)
 
+UK Average House price 2005-2013
+![01_Average_UK_house_price_2005_2013](https://github.com/Pablo-tester/house_market/assets/76554081/faae6f63-3ed6-4939-b1c8-9395636ac6f3)
+
+UK Average House price Time Series decomposition (seasonality, trend and random):
+
+![05_Average_UK_house_price_TS_decomposition_ADDITIVE](https://github.com/Pablo-tester/house_market/assets/76554081/4a1705af-70cd-47e4-87fa-0c5bda799c39)
+
 Year on year and month on month UK Average house price change show negative rates for first time in September 2023 since 2011.
 
 ![03_UK_MoM_and_YoY_percent_price_change_SEP2023](https://github.com/Pablo-tester/house_market/assets/76554081/9edc5d11-101b-4c5a-9d74-a82146ad1116)
