@@ -1,4 +1,10 @@
 # 07_House_price_TS_train_test_split.R
+source('01_Load_house_prices_data.R')
+source('02_House_data_EDA.R')
+source('03_House_prices_calculations.R')
+source('04_House_price_change_plots.R')
+source('05_House_price_TS_EDA.R')
+source('06_House_price_correlation_analysis.R')
 
 # In this section we are going to split the initial TS series by Train and Test to fit some model later on
 
@@ -72,6 +78,6 @@ arima_forecast <- forecast(arima_model, h=12)
                 forecast.obj = arima_forecast,
                 test = test)
   
-  # Plotting the forecast 
+# Plotting the forecast 
   plot_forecast(arima_forecast)
 

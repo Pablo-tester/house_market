@@ -67,10 +67,11 @@ House_price_plot <- ts_plot(House_price_ts,
                             # slider = TRUE)
 House_price_plot
 
-ggsave (plot = House_price_plot,
-        path = "~/Documents/Pablo_zorin/Pablo_tester/house_market/plots",
-        filename = "04_Average_UK_House_price_2005_2013.png", 
-        width = 10, height = 8, bg = "white")
+# ggsave function not applicable with a plotly object
+# ggsave (plot = House_price_plot,
+#        path = "~/Documents/Pablo_zorin/Pablo_tester/house_market/plots",
+#        filename = "04_Average_UK_House_price_2005_2013.png", 
+#        width = 10, height = 8, bg = "white")
 
 #In addition: Warning message:
 #  'plotly::export' is deprecated.
