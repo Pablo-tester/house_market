@@ -62,7 +62,7 @@ tail(Latest_data)
 MoM_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
-       subtitle = "UK MoM and YoY percent price change. Latest data August 2023",
+       subtitle = "UK MoM and YoY percent price change. Latest data September 2023",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) 
   theme_bw()
