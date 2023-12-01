@@ -55,4 +55,13 @@ We will explore how to create, train and compare several TS univariate models us
 
 The TSstudio package provides a set of tools descriptive and predictive analysis of time series data. That includes utility functions for preprocessing time series data, interactive visualization functions based on the plotly package engine, and set of tools for training and evaluating time series forecasting models from the forecast, forecastHybrid, and bsts packages.
 
+### 2.1 ARIMA model 12 months forecast
+
+![14_ARIMA_model_forecast_CI_Objerved_forecasted](https://github.com/Pablo-tester/house_market/assets/76554081/257ad423-8e46-4578-9076-2a98217f3e61)
+
+
+### 2.2 Trained model comparison using partitions
+
+![15_Train_model_using_partitions](https://github.com/Pablo-tester/house_market/assets/76554081/d76ca441-da0c-47d9-85c0-069abc9c7121)
+
 TSstudio: <https://ramikrispin.github.io/TSstudio/>
