@@ -57,18 +57,18 @@ tail(Price_changel_my)
 
 yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
-  labs(title ="UK Average house prices showing negative growth rates since 2011. September 2023 data.",
+  labs(title ="UK Average house prices showing negative growth rates since 2011. November 2023 data.",
        subtitle = "UK YoY and MoM percent price change",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
   theme_bw()
 yoy_perc_change_my
 
-ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_SEP2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
 # Write Price_changel_my data set (Long format) into a .csv file: 
 
-write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_SEP23.csv"), row.names = TRUE)
+write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_NOV23.csv"), row.names = TRUE)
 
 
 # 6. Include annotations in the chart
