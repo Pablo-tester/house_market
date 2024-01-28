@@ -1,4 +1,7 @@
 # 04_House_price_change_plots
+source('01_Load_house_prices_data.R')
+source('02_House_data_EDA.R')
+source('03_House_prices_calculations.R')
 
 library(tidyverse)
 library(here)
@@ -50,7 +53,7 @@ Price_changel_my <- House_price_change_my %>%
                names_to = "metric",values_to = "percent")
 Price_changel_my
 
-# Check start end Average house price time series
+# RE_DESIGNING THIS PLOT TO INCLUDE END OF YEAR VALUE
 head(Price_changel_my)
 tail(Price_changel_my)
 
@@ -69,6 +72,22 @@ ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023.jpeg"),width
 # Write Price_changel_my data set (Long format) into a .csv file: 
 
 write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_NOV23.csv"), row.names = TRUE)
+
+# RE-DESIGNING THIS PLOT: 
+
+# 1. Include latest values to be use in the dot chart in combination with the line chart
+# Dataset:  Price_changel_my
+
+House_price_max_date <- Price_changel_my %>%  select(datef,metric,percent)
+endv <- House_price_max_date %>% filter(datef == max(datef))
+endv
+
+# datef      metric          percent
+# <date>     <chr>             <dbl>
+#  1 2023-11-01 YoY_perc_change   -2.11
+# 2 2023-11-01 MoM_perc_change   -0.82
+
+
 
 
 # 6. Include annotations in the chart
