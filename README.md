@@ -45,7 +45,8 @@ UK Average House price Time Series decomposition (seasonality, trend and random)
 
 Year on year and month on month UK Average house price change show negative rates for first time in September 2023 since 2011.
 
-![Uploading 03_UK_MoM_and_YoY_percent_price_change_NOV2023_LABELS.jpeg…]()
+![03_UK_MoM_and_YoY_percent_price_change_NOV2023_LABELS](https://github.com/Pablo-tester/house_market/assets/140793883/e0a45164-0814-49ca-9af7-e660d7fd0b23)
+
 
 
 ## 2. Univariate TS modelling using TSstudio
