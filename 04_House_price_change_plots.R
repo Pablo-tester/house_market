@@ -19,20 +19,17 @@ House_price <- Average_priced %>%
   )
 House_price 
 
-# 3. Subset data for MoM price change and turn long into wider format
-House_price_change <- House_price %>% select(datef,YoY_perc = YoY_percr)
-House_price_change
-
-# 3.1 transform data from wide into long
+# 1. Subset data from House_price set and turn long into wider format
 # Using privot_longer() from dplyr package
-Price_changel <- House_price_change %>% 
+Price_change_data <- House_price %>% 
+  select(datef,YoY_perc_change = YoY_percr,
+         MoM_perc_change = MoM_percr)%>% 
   pivot_longer(cols = !datef,
                names_to = "metric",values_to = "percent")
-Price_changel
+Price_change_data
 
-# 4. Plot price MoM and YoY price change over time
-
-yoy_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, color = metric )) + 
+# 2. Plot price MoM and YoY price change over time
+yoy_perc_change <-ggplot(data = Price_change_data, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
        subtitle = "UK YoY percent price change",
@@ -41,56 +38,81 @@ yoy_perc_change <-ggplot(data = Price_changel, aes( x = datef, y = percent, colo
   theme_bw()
 yoy_perc_change
 
-# 5. Create plot including both MoM and YoY percent change chart
-House_price_change_my <- House_price %>% select(datef,YoY_perc_change = YoY_percr,
-                                                MoM_perc_change = MoM_percr)
-House_price_change_my
 
-# 5.1 transform data from wide into long
-# Using privot_longer() from dplyr package
-Price_changel_my <- House_price_change_my %>% 
-  pivot_longer(cols = !datef,
-               names_to = "metric",values_to = "percent")
-Price_changel_my
+ggsave(paste0("plots/02_UK_MoM_and_YoY_percent_price_change_NOV2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
-# RE_DESIGNING THIS PLOT TO INCLUDE END OF YEAR VALUE
-head(Price_changel_my)
-tail(Price_changel_my)
+# 3. INCLUDE NEW LABEL FOR METRICS 
+# 3.1 Change legend text labels
+
+# 3.1.1 We need to create a new variable
+# Recode "metric" variable into a new variable
+Price_change_labels <- Price_change_data %>% 
+                       select(datef,metric,percent) %>% 
+                       mutate(metric_label = recode(metric,
+                                                    YoY_perc_change = "YoY percent change",
+                                                    MoM_perc_change = "MoM percent change"))
+Price_change_labels
+
+# 3.1.2 So then we can use this new variable as label
+yoy_perc_change_label <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
+  geom_line() +
+  labs(title ="UK Average house prices into reverse from last year all time high",
+       subtitle = "UK YoY percent price change",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  theme_bw()
+yoy_perc_change_label
+
+ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023_LABELS.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
 
-yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent, color = metric )) + 
+# 4. INCLUDE LATEST VALUES AS DOT PLOTS AT THE END OF THE LINE CHARTS 
+# wip
+
+# Dataset: Price_change_labels
+
+# 3.1 Create labels for latest data points 
+House_price_max_date <- Price_change_data %>%  select(datef,metric,percent)
+endv <- House_price_max_date %>% filter(datef == max(datef))
+endv
+
+# yoy_perc_change_my <-ggplot(data = Price_changel_my, aes( x = datef, y = percent, color = metric )) + 
+perc_change_dot  <-ggplot(data = Price_change_data, aes( x = datef, y = percent, color = metric )) + 
   geom_line() +
   labs(title ="UK Average house prices showing negative growth rates since 2011. November 2023 data.",
        subtitle = "UK YoY and MoM percent price change",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
   theme_bw()
-yoy_perc_change_my
+perc_change_dot
 
-ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
-# Write Price_changel_my data set (Long format) into a .csv file: 
-
-write.csv(Price_changel_my,here("data","UK_MoM_and_YoY_perc_price_change_NOV23.csv"), row.names = TRUE)
-
-# RE-DESIGNING THIS PLOT: 
-
-# 1. Include latest values to be use in the dot chart in combination with the line chart
-# Dataset:  Price_changel_my
-
-House_price_max_date <- Price_changel_my %>%  select(datef,metric,percent)
-endv <- House_price_max_date %>% filter(datef == max(datef))
-endv
 
 # datef      metric          percent
 # <date>     <chr>             <dbl>
 #  1 2023-11-01 YoY_perc_change   -2.11
 # 2 2023-11-01 MoM_perc_change   -0.82
 
+# Now we use geom_text() function to include those end values
+
+Endv_plot <- ggplot(data = Price_changel_my) +
+             geom_line() +
+             labs(title ="UK Average house prices showing negative growth rates since 2011. November 2023 data.",
+             subtitle = "UK YoY and MoM percent price change",
+             # Change X and Y axis labels
+             x = "Year", y = "House price change (%)" ) +
+             theme_bw()
+
+Endv_plot
 
 
 
-# 6. Include annotations in the chart
+
+
+
+
+
+# 6. Adding annotations to the chart 
 
 # Include a shadowed area:
 # https://ggplot2.tidyverse.org/reference/annotate.html
