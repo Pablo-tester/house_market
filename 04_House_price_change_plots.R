@@ -64,3 +64,31 @@ yoy_perc_change_label <-ggplot(data = Price_change_labels, aes( x = datef, y = p
 yoy_perc_change_label
 
 ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023_LABELS.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+# 3.2 Remove  Change legend text labels main text and place legend inside the chart
+
+Price_change_labels <- Price_change_data %>% 
+  select(datef,metric,percent) %>% 
+  mutate(metric_label = recode(metric,
+                               YoY_perc_change = "YoY percent change",
+                               MoM_perc_change = "MoM percent change"))
+Price_change_labels
+
+# 3.1.2 So then we can use this new variable as label and also remove label title
+
+yoy_perc_change_label <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
+  geom_line() +
+  labs(title ="UK Average house prices into reverse from last year all time high",
+       subtitle = "UK YoY percent price change",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  theme_bw() + 
+  theme(
+    # legend position = "none", "left", "right", "bottom","top"
+    # legend.position = c(X,Y)
+    legend.position = c(.88,.15),
+    legend.title=element_blank()) # removed legend title
+yoy_perc_change_label
+
+ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023_LEGEND_POSITION.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
