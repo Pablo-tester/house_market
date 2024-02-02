@@ -74,12 +74,12 @@ Price_change_labels <- Price_change_data %>%
                                MoM_perc_change = "MoM percent change"))
 Price_change_labels
 
-# 3.1.2 So then we can use this new variable as label and also remove label title
+# 3.3 Re-designed chart with legends inside plot area 
 
 yoy_perc_change_label <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
   geom_line() +
   labs(title ="UK Average house prices into reverse from last year all time high",
-       subtitle = "UK YoY percent price change",
+       subtitle = "UK YoY percent price change. ONS UK House Price Index: November 2023",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
   theme_bw() + 
@@ -92,3 +92,38 @@ yoy_perc_change_label
 
 ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023_LEGEND_POSITION.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
+# 4. INCLUDE END LINE DOT VALUE
+# References for this new feature 
+# ggplot2-visualizations/ 14 Sparkline OECD CPI.R 
+# https://github.com/Pablo-source/ggplot2-visualizations/blob/main/14%20Sparkline%20OECD%20CPI.R
+
+# 4.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
+ endv <- group_by(Price_change_labels, metric) %>% filter(datef == max(datef))
+ endv
+
+ yoy_perc_endv <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
+   
+   geom_line() +
+   # Adding end value metric dot shape and label
+   geom_point(data = endv, col = 'darkgray') +
+   geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  
+   labs(title ="UK Average house prices into reverse from last year all time high",
+        subtitle = "UK YoY percent price change. ONS UK House Price Index: November 2023",
+        # Change X and Y axis labels
+        x = "Year", y = "House price change (%)" ) +
+   theme_bw() + 
+   theme(
+     # legend position = "none", "left", "right", "bottom","top"
+     # legend.position = c(X,Y)
+     legend.position = c(.88,.15),
+     legend.title=element_blank()) # removed legend title
+ 
+ yoy_perc_endv
+ 
+ ggsave(paste0("plots/03_UK_MoM_and_YoY_percent_price_change_NOV2023_ENDV_MARK.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ 
+ 
+ 
+ 
+ 
