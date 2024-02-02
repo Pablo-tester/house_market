@@ -44,8 +44,14 @@ UK Average House price Time Series decomposition (seasonality, trend and random)
 ![05_Average_UK_house_price_TS_decomposition_ADDITIVE](https://github.com/Pablo-tester/house_market/assets/76554081/4a1705af-70cd-47e4-87fa-0c5bda799c39)
 
 Year on year and month on month UK Average house price change show negative rates for first time in September 2023 since 2011.
+Included reference point (latest value) for each series (MoM and YoY percent change) by adding these to lines to *04_House_price_change_plots.R* script: 
 
-![03_UK_MoM_and_YoY_percent_price_change_NOV2023_LEGEND_POSITION](https://github.com/Pablo-tester/house_market/assets/76554081/5dd18865-f239-4098-adcb-207cbd1382eb)
+'endv <- group_by(Price_change_labels, metric) %>% filter(datef == max(datef))
+ geom_point(data = endv, col = 'darkgray') +
+ geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2)'
+
+![03_UK_MoM_and_YoY_percent_price_change_NOV2023_ENDV_MARK](https://github.com/Pablo-tester/house_market/assets/76554081/03cd172a-2110-45b5-a269-9add5be91aa9)
+
 
 
 ## 2. Univariate TS modelling using TSstudio
