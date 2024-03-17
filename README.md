@@ -50,8 +50,7 @@ Included reference point (latest value) for each series (MoM and YoY percent cha
  geom_point(data = endv, col = 'darkgray') +
  geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2)'
 
-![03_UK_MoM_and_YoY_percent_price_change_NOV2023_ENDV_MARK](https://github.com/Pablo-tester/house_market/assets/76554081/03cd172a-2110-45b5-a269-9add5be91aa9)
-
+![03_UK_MoM_and_YoY_price_change_DEC2023_env_MARK](https://github.com/Pablo-tester/house_market/assets/140793883/b2a5009c-0edc-48f5-8582-86a3bca68ca1)
 
 
 ## 2. Univariate TS modelling using TSstudio
