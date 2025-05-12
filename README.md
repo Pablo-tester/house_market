@@ -36,6 +36,9 @@ Closing issues as I push the fix, referencing issue number in commit message
 
 ### 1.1 Average house price change (%)
 
+UK House price January 2005 December 2023
+![35_ONS_Average_UK_House_prices_Jan2005_December2023_Annotated](https://github.com/user-attachments/assets/3dffa6b4-2ca2-4b43-abf3-4f71db13afdf)
+
 UK Average House price 2005-2013
 ![01_Average_UK_house_price_2005_2013](https://github.com/Pablo-tester/house_market/assets/76554081/faae6f63-3ed6-4939-b1c8-9395636ac6f3)
 
