@@ -1,7 +1,5 @@
 # 03_House_prices_calc
-
 # This script will include calculations required to analyse UK house prices
-
 source('01_Load_house_prices_data.R')
 source('02_House_data_EDA.R')
 
@@ -44,6 +42,7 @@ House_price_change <- House_price %>% select(datef,MoM_perc = MoM_percr,YoY_perc
 
 # 3.1 transform data from wide into long
 # Using privot_longer() from dplyr package
+library(dplyr)
 Price_changel <- House_price_change %>% 
                  pivot_longer(cols = !datef,
                               names_to = "metric",values_to = "percent")
