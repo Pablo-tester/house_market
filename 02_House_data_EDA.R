@@ -112,6 +112,6 @@ CHG_HPRICE_grid
 
 
 # Created a grid of 2 columns to display both charts on same png file
-grid.arrange(AVG_HPRICE_grid,CHG_HPRICE_grid,ncol=2)
+GRID_PLOT <-grid.arrange(AVG_HPRICE_grid,CHG_HPRICE_grid,ncol=2)
 ggsave("plots/16_UK_House_prices_total_change_grid_Jan2025_Dec2023.png", width = 6, height = 4) 
 
