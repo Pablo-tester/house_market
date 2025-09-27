@@ -1,4 +1,4 @@
-# 1 Load house prices data into R
+# Rscript: "01_Load_house_prices_data.R"
 library(readxl)
 library(here)
 library(dplyr)
