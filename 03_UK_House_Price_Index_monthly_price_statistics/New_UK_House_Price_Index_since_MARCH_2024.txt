@@ -1,0 +1,18 @@
+- This is the new "UK House Price Index: monthly price statistics"
+- ONS - URL : "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/ukhousepriceindexmonthlypricestatistics"
+
+- The above publication replaces "UK House Price Index: December 2023"
+
+- This "UK Price Index: December 2023" publication was discontinued by the ONS 
+- ONS -URL: "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/december2023"
+- Existing ONS Notice from 14 February 2024 from the URL in previous line.
+- This release has been discontinued. 
+- The latest UK House Price Index (HPI) main insights and links to relevant tables and datasets will be included within our new, monthly
+ "Private rent and house prices, UK" bulletin launching on 20 March 2024. 
+- The full UK HPI report and data will continue being published monthly on HM Land Registry's website.
+- Downloaded file from URL: ""
+
+- UK House Price Index: monthly price statistics
+- URL: "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/ukhousepriceindexmonthlypricestatistics"
+- Downloaded Excel file: "17 September 2025 edition of this dataset"
+- Downloaded Excel file for this 17 September 2025 edition of this dataset file: "ukhousepriceindexmonthlypricestatistics.xlsx"
