@@ -3,6 +3,8 @@
 source('01_Load_house_prices_data.R')
 
 library(tidyverse)
+library(dplyr)
+library(ggplot2)
 # 1 Start exploring "Average_price" data set: 
 
 head(Average_house_price)
