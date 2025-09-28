@@ -1,10 +1,13 @@
 # 04_House_price_change_plots
-source('01_Load_house_prices_data.R')
-source('02_House_data_EDA.R')
-source('03_House_prices_calculations.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/01_Load_house_prices_data.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/02_House_data_EDA.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/03_House_prices_calculations.R')
 
-library(tidyverse)
+library(ggplot2)
+library(dplyr)
 library(here)
+
+here()
 
 House_price <- Average_priced %>%  
   mutate(
@@ -21,7 +24,7 @@ House_price <- Average_priced %>%
 House_price 
 
 # 1. Subset data from House_price set and turn long into wider format
-# Using privot_longer() from dplyr package
+# Using pivot_longer() from dplyr package
 Price_change_data <- House_price %>% 
                     select(datef,YoY_perc_change = YoY_percr,MoM_perc_change = MoM_percr)%>% 
                     pivot_longer(cols = !datef,
