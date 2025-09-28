@@ -14,5 +14,5 @@
 
 - UK House Price Index: monthly price statistics
 - URL: "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/ukhousepriceindexmonthlypricestatistics"
-- Downloaded Excel file: "17 September 2025 edition of this dataset"
+- Downloaded latest Excel dataset release file: "17 September 2025 edition of this dataset"
 - Downloaded Excel file for this 17 September 2025 edition of this dataset file: "ukhousepriceindexmonthlypricestatistics.xlsx"
