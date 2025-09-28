@@ -1,8 +1,6 @@
 # Rscript: "02_House_Data_EDA.R"
 # Call previous script to load in raw .xls data file
-source('01_Load_house_prices_data.R')
 
-library(tidyverse)
 library(dplyr)
 library(ggplot2)
 

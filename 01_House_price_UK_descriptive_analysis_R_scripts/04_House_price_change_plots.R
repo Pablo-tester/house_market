@@ -1,7 +1,7 @@
 # 04_House_price_change_plots
-source('01_Load_house_prices_data.R')
-source('02_House_data_EDA.R')
-source('03_House_prices_calculations.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/01_Load_house_prices_data.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/02_House_data_EDA.R')
+source('./01_House_price_UK_descriptive_analysis_R_scripts/03_House_prices_calculations.R')
 
 library(tidyverse)
 library(here)
