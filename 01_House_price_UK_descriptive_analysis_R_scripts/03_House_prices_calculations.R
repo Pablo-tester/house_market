@@ -1,9 +1,7 @@
 # Rscript:  03_House_prices_calc
 # This script will include calculations required to analyse UK house prices
-source('01_Load_house_prices_data.R')
-source('02_House_data_EDA.R')
-
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
 # 1. Keep just these two data sets
 # Average_priced
