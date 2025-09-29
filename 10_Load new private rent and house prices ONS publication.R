@@ -38,5 +38,11 @@ excel_sheets(path_to_file)
 # - I will be importing data from row 3 until row 178 on Excel Sheet “2” from
 # “ukhousepriceindexmonrthlypricestatistic.xlsx” Excel file. 
 
+house_price_data_raw <- read_excel(here("data_UK_House_Price_Index"),
+                                   sheet = 2, 
+                                   skip = 2,
+                                   n_max = 178, col_names = TRUE) %>% 
+                        clean_names()
+house_price_data_raw
 
 
