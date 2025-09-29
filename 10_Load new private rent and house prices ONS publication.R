@@ -31,18 +31,41 @@ excel_sheets(path_to_file)
 # [8] "5"           "6"           "7"           "8"           "9"           "10"          "11" 
 
 # 1.3 Import Excel data into R
-
 # I will import data from sheet “2” where column “United Kingdom” includes UK Average House price 
 # from 2011 to July 2025.
-
 # - I will be importing data from row 3 until row 178 on Excel Sheet “2” from
 # “ukhousepriceindexmonrthlypricestatistic.xlsx” Excel file. 
-
-house_price_data_raw <- read_excel(here("data_UK_House_Price_Index"),
+House_price_file_contents <- read_excel(here("data_UK_House_Price_Index","ukhousepriceindexmonthlypricestatistics.xlsx"),
                                    sheet = 2, 
                                    skip = 2,
                                    n_max = 178, col_names = TRUE) %>% 
-                        clean_names()
-house_price_data_raw
+                             clean_names()
+House_price_file_contents
+
+# Import data from fifth tab in the Excel file:
+House_price_data_raw <- read_excel(here("data_UK_House_Price_Index","ukhousepriceindexmonthlypricestatistics.xlsx"),
+                                        sheet = 5, 
+                                        skip = 2,
+                                        n_max = 178, col_names = TRUE) %>% 
+                         clean_names()
+House_price_data_raw
+
+head(House_price_data_raw)
+tail(House_price_data_raw)
+names(House_price_data_raw)
+
+# 2. Subset data for United Kingdom and create a quick chart
+# 2.1 Build new date variables as strings from initial time_period column in original dataset
+library(stringr)
+
+UK_house_price <- House_price_data_raw %>% select(time_period,united_kingdom) %>% 
+                  mutate(
+                    day = '01',
+                    year = str_sub(time_period, -4, -1),
+                         month = str_sub(time_period, 1,3)) 
+UK_house_price
+
+# 3.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
+library(lubridate)
 
 
