@@ -75,3 +75,31 @@ str(UK_house_price)
 UK_house_price_plot_data <- UK_house_price %>% select(date_fmt,united_kingdom)
 UK_house_price_plot_data
 
+str(UK_house_price_plot_data)
+
+# 4. Plot UK house price time series data
+min_date <- min(UK_house_price_plot_data$date_fmt)
+max_date <- max(UK_house_price_plot_data$united_kingdom)
+
+install.packages("wesanderson",dependencies = TRUE)
+library(wesanderson)
+
+# Setup color palette manually
+# scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
+install.packages("viridis",dependencies = TRUE)
+library(viridis)
+
+UK_monthly_house_price_plot <- ggplot(data = UK_house_price_plot_data, aes( x = date_fmt, y = united_kingdom)) + 
+  geom_line() +
+   labs(title ="UK Average house prices into reverse from last year all time high",
+       subtitle = "Source:ONS.Private rent and house prices, UK: September 2025",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+ scale_y_continuous(breaks = seq(0,300000, by = 20000)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  scale_color_viridis(discrete=TRUE) +
+  theme_bw() + 
+  theme(legend.position = c(.88,.15),
+    legend.title=element_blank()) # removed legend title
+UK_monthly_house_price_plot
+
