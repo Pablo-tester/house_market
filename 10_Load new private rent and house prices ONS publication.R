@@ -5,5 +5,19 @@
 
 # Downloaded Excel file (.xls) from Figure 1: UK private rent and house prices
 
+# Load required libraries
+library(here)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+
+
 # 1. Load private rents index and house price index
-# It is located inside \data_UK_House_Price_Index folder 
+# 1.1  It is located inside \data_UK_House_Price_Index folder 
+here()
+Excel_input_file <- list.files(path = "./data_UK_House_Price_Index", pattern = "xlsx$")
+Excel_input_file
+# [1] "ukhousepriceindexmonthlypricestatistics.xlsx"
+
+# 1.2 Check sheet names from above Excel file: 
+excel_sheets("./data_UK_House_Price_Index/u")
