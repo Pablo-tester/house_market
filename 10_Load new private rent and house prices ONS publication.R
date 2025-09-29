@@ -58,6 +58,9 @@ names(House_price_data_raw)
 # 2.1 Build new date variables as strings from initial time_period column in original dataset 
 library(stringr)
 
+# IMPORTANT !!! 
+# I need to account for these dates  "Jul 2024 [r]" 
+# This [r] is not working with the above data manipulation !
 UK_house_price <- House_price_data_raw %>% select(time_period,united_kingdom) %>% 
                   mutate(
                     day = '01',
@@ -90,7 +93,7 @@ install.packages("viridis",dependencies = TRUE)
 library(viridis)
 
 UK_monthly_house_price_plot <- ggplot(data = UK_house_price_plot_data, aes( x = date_fmt, y = united_kingdom)) + 
-  geom_line() +
+  geom_line(color = "mediumpurple2") +
    labs(title ="UK Average house prices into reverse from last year all time high",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025",
        # Change X and Y axis labels
@@ -103,3 +106,4 @@ UK_monthly_house_price_plot <- ggplot(data = UK_house_price_plot_data, aes( x = 
     legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
 
+ggsave(paste0("plots/18_Average_UK_House_Price_ONS_private_rent_and_house_prices_SEP2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
