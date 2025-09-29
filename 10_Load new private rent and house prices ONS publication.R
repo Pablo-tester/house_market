@@ -55,7 +55,7 @@ tail(House_price_data_raw)
 names(House_price_data_raw)
 
 # 2. Subset data for United Kingdom and create a quick chart
-# 2.1 Build new date variables as strings from initial time_period column in original dataset
+# 2.1 Build new date variables as strings from initial time_period column in original dataset 
 library(stringr)
 
 UK_house_price <- House_price_data_raw %>% select(time_period,united_kingdom) %>% 
