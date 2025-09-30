@@ -71,11 +71,12 @@ UK_house_price
 # 3.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
 library(lubridate)
 UK_house_price <- UK_house_price %>%  mutate(date = paste0(year,"/",month,"/",day))
+
 # Parse dates using lubridate
-UK_house_price <- UK_house_price %>%  mutate(date_fmt = ymd(date))
+UK_house_price_date_fmt <- UK_house_price %>%  mutate(date_fmt = ymd(date))
 str(UK_house_price)
 
-UK_house_price_plot_data <- UK_house_price %>% select(date_fmt,united_kingdom)
+UK_house_price_plot_data <- UK_house_price_date_fmt %>% select(date_fmt,united_kingdom)
 UK_house_price_plot_data
 
 str(UK_house_price_plot_data)
