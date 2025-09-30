@@ -63,9 +63,9 @@ time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
 # I will split initial Original_date_fix into two halves to fix rows with trailing character
 # WIP
 
-
-
-
+time_period_values_fixed <- House_price_data_raw %>% 
+                            mutate(date_clean =  str_sub(time_period, 1, 8))
+time_period_values_fixed
 
 
 
