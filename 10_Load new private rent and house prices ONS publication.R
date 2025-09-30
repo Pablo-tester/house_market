@@ -54,8 +54,26 @@ head(House_price_data_raw)
 tail(House_price_data_raw)
 names(House_price_data_raw)
 
-# 2. Subset data for United Kingdom and create a quick chart
-# 2.1 Build new date variables as strings from initial time_period column in original dataset 
+# 2. Address latest rows containing 1 Feb 2025 [r] character in "time_period" column: 
+Original_date_fix <- House_price_data_raw
+
+time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
+
+# From row 163 to row 175, time_period column contains an extra [r] character:
+# I will split initial Original_date_fix into two halves to fix rows with trailing character
+# WIP
+
+
+
+
+
+
+
+
+
+## Resume this section below once trailin character for time_period is fixed
+# 3. Subset data for United Kingdom and create a quick chart
+# 3.1 Build new date variables as strings from initial time_period column in original dataset 
 library(stringr)
 
 # IMPORTANT !!! 
@@ -68,7 +86,7 @@ UK_house_price <- House_price_data_raw %>% select(time_period,united_kingdom) %>
                          month = str_sub(time_period, 1,3)) 
 UK_house_price
 
-# 3.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
+# 4.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
 library(lubridate)
 UK_house_price <- UK_house_price %>%  mutate(date = paste0(year,"/",month,"/",day))
 
@@ -81,7 +99,7 @@ UK_house_price_plot_data
 
 str(UK_house_price_plot_data)
 
-# 4. Plot UK house price time series data
+# 5. Plot UK house price time series data
 min_date <- min(UK_house_price_plot_data$date_fmt)
 max_date <- max(UK_house_price_plot_data$united_kingdom)
 
