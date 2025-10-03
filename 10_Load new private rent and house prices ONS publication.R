@@ -119,19 +119,25 @@ write.csv(data_UK_House_Price_Inde_cleansed,here("cleansed_data","data_UK_House_
 # 4. Split initial House Price index dataset into different geographies
 
 # 4.1 United Kingdom
+UK_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,united_kingdom)
+write.csv(UK_House_price_fmted,here("cleansed_data","UK_House_price_fmted.csv"), row.names = TRUE)
 
 # 4.2 Great Britain
+GB_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,great_britain)
+write.csv(GB_House_price_fmted,here("cleansed_data","GB_House_price_fmted.csv"), row.names = TRUE)
 
-# 4.3 England, Wales, Scotland
+# 4.3 GB Countries - England, Wales, Scotland
+COUNTRIES_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,england,wales,scotland,northern_ireland_note_3)
+write.csv(COUNTRIES_House_price_fmted,here("cleansed_data","COUNTRIES_House_price_fmted.csv"), row.names = TRUE)
 
 # 4.4 Regions
+REGIONS_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
+write.csv(REGIONS_House_price_fmted,here("cleansed_data","REGIONS_House_price_fmted.csv"), row.names = TRUE)
 
+# Remove previous dataframes. Keeping just House_price_data_raw and UK_House_price_fmted,GB_House_price_fmted,COUNTRIES_House_price_fmted,REGIONS_House_price_fmted
+rm(list=ls()[! ls() %in% c("House_price_data_raw","UK_House_price_fmted","GB_House_price_fmted","COUNTRIES_House_price_fmted","REGIONS_House_price_fmted")])
 
-UK_house_price_plot_data <- UK_house_price_date_fmt %>% select(date_fmt,united_kingdom)
-UK_house_price_plot_data
-
-str(UK_house_price_plot_data)
-
+# 5. Plot house price data for UK 
 # 5. Plot UK house price time series data
 min_date <- min(UK_house_price_plot_data$date_fmt)
 max_date <- max(UK_house_price_plot_data$united_kingdom)
