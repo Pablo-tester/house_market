@@ -62,8 +62,7 @@ time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
 # From row 163 to row 175, time_period column contains an extra [r] character:
 # I will split initial Original_date_fix into two halves to fix rows with trailing character
 
-# WIP WIP WIP WIP WIP WIPgit
-
+library(stringr)
 time_period_values_fixed <- House_price_data_raw %>% 
                             mutate(date_clean =  str_sub(time_period, 1, 8))
 time_period_values_fixed
@@ -71,7 +70,7 @@ time_period_values_fixed
 ## Resume this section below once trailin character for time_period is fixed
 # 3. Subset data for United Kingdom and create a quick chart
 # 3.1 Build new date variables as strings from initial time_period column in original dataset 
-library(stringr)
+
 
 
 
