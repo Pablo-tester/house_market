@@ -61,46 +61,35 @@ time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
 
 # From row 163 to row 175, time_period column contains an extra [r] character:
 # I will split initial Original_date_fix into two halves to fix rows with trailing character
-
 library(stringr)
-time_period_values_fixed <- House_price_data_raw %>% 
-                            mutate(date_clean =  str_sub(time_period, 1, 8))
-time_period_values_fixed
 
-## Resume this section below once trailin character for time_period is fixed
-# 3. Subset data for United Kingdom and create a quick chart
-# 3.1 Build new date variables as strings from initial time_period column in original dataset 
+names(House_price_data_raw)
 
+fixing_time_period_01 <- House_price_data_raw %>% 
+                            mutate(date_clean =  str_sub(time_period, 1, 8)) %>% 
+                            select(date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+                                   north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
 
+fixing_time_period_01
 
-
-
-
-
-
-
-
-
-
-
-
-# IMPORTANT !!! 
 # I need to account for these dates  "Jul 2024 [r]" 
 # This [r] is not working with the above data manipulation !
-UK_house_price <- House_price_data_raw %>% select(time_period,united_kingdom) %>% 
+fixing_time_period_02 <- fixing_time_perio_01 %>% 
                   mutate(
                     day = '01',
-                    year = str_sub(time_period, -4, -1),
-                         month = str_sub(time_period, 1,3)) 
-UK_house_price
+                    year = str_sub(date_clean, -4, -1),
+                         month = str_sub(date_clean, 1,3)) 
+fixing_time_period_02
 
 # 4.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
 library(lubridate)
-UK_house_price <- UK_house_price %>%  mutate(date = paste0(year,"/",month,"/",day))
+fixing_time_period_03 <- fixing_time_period_02 %>%  mutate(date = paste0(year,"/",month,"/",day))
 
 # Parse dates using lubridate
-UK_house_price_date_fmt <- UK_house_price %>%  mutate(date_fmt = ymd(date))
-str(UK_house_price)
+fixing_time_period_04 <- fixing_time_period_03 %>%  
+                         select() %>% 
+                         mutate(date_fmt = ymd(date))
+str(fixing_time_period_04)
 
 UK_house_price_plot_data <- UK_house_price_date_fmt %>% select(date_fmt,united_kingdom)
 UK_house_price_plot_data
