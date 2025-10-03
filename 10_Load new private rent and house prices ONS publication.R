@@ -54,6 +54,52 @@ head(House_price_data_raw)
 tail(House_price_data_raw)
 names(House_price_data_raw)
 
+# 2 Split Dataframe to treat trailing [r] character at the end: 
+# From raw 1 to raw 162. Then I will union this dataframe to the last section from 163 to 175 
+
+First_section_data_raws_01_165 <- House_price_data_raw %>% 
+                                  slice(1:162)
+
+Second_section_data_raws_163_175 <- House_price_data_raw %>% 
+                                    slice(163:175)
+
+# First_section_data_raws_01_165
+
+# 3. Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
+library(stringr)
+
+fixing_time_period_01_FIRST_HALF <- First_section_data_raws_01_165 %>% 
+                                    mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
+                                    select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+                                    north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
+
+check_new_cols_period_01_FIRST_HALF  <- fixing_time_period_01_FIRST_HALF %>%  select(time_period,date_clean)
+check_new_cols_period_01_FIRST_HALF
+
+library(stringr)
+
+
+fixing_time_period_02 <- fixing_time_period_01 %>% 
+  mutate(
+    day = '01',
+    year = str_sub(date_clean, -4, -1),
+    month = str_sub(date_clean, 1,3)) 
+fixing_time_period_02
+
+check_new_cols <- fixing_time_period_02 %>%  select(date_clean,day,month,year)
+check_new_cols 
+
+
+
+
+
+
+
+
+# Second_section_data_raws_163_175
+
+# 
+
 # 2. Address latest rows containing 1 Feb 2025 [r] character in "time_period" column: 
 Original_date_fix <- House_price_data_raw
 
