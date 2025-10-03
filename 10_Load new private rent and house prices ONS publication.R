@@ -61,7 +61,6 @@ time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
 
 # From row 163 to row 175, time_period column contains an extra [r] character:
 # I will split initial Original_date_fix into two halves to fix rows with trailing character
-library(stringr)
 
 names(House_price_data_raw)
 
@@ -72,8 +71,15 @@ fixing_time_period_01 <- House_price_data_raw %>%
 
 fixing_time_period_01
 
+# 3. CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
+
+# 3.1 Use str_sub() function from {stringr} package  to create individual day month year variables from initial date_clean string variable
+
 # I need to account for these dates  "Jul 2024 [r]" 
 # This [r] is not working with the above data manipulation !
+library(stringr)
+
+
 fixing_time_period_02 <- fixing_time_perio_01 %>% 
                   mutate(
                     day = '01',
@@ -81,15 +87,45 @@ fixing_time_period_02 <- fixing_time_perio_01 %>%
                          month = str_sub(date_clean, 1,3)) 
 fixing_time_period_02
 
-# 4.Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
+# 3.2 Then using ymd() function from  {lubridate} package, build the date format new date variable.
+
+# Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
 library(lubridate)
 fixing_time_period_03 <- fixing_time_period_02 %>%  mutate(date = paste0(year,"/",month,"/",day))
 
-# Parse dates using lubridate
+names(fixing_time_period_03)
+
+#[1] "date_clean"               "united_kingdom"           "great_britain"            "england"                  "wales"                    "scotland"                 "northern_ireland_note_3" 
+#[8] "north_east"               "north_west"               "yorkshire_and_the_humber" "east_midlands"            "west_midlands"            "east"                     "london"                  
+#[15] "south_east"               "south_west"               "day"                      "year"                     "month"                    "date"   
+
+# Parse dates using ymd() lubridate function:
 fixing_time_period_04 <- fixing_time_period_03 %>%  
-                         select() %>% 
-                         mutate(date_fmt = ymd(date))
-str(fixing_time_period_04)
+                         mutate(date_fmt = ymd(date)) %>% 
+                         select(date_fmt,date,day,month,year,
+                                united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+                                north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
+fixing_time_period_04                     
+
+data_UK_House_Price_Inde_cleansed <- fixing_time_period_04
+
+# 3.3 Save this date formatted dataframe as .csv file 
+# Save time period formatted column dataframe in a new "cleansed_data" sub-folder in my WD
+here()
+if(!dir.exists("cleansed_data")){dir.create("cleansed_data")}
+write.csv(data_UK_House_Price_Inde_cleansed,here("cleansed_data","data_UK_House_Price_Inde_cleansed.csv"), row.names = TRUE)
+
+
+# 4. Split initial House Price index dataset into different geographies
+
+# 4.1 United Kingdom
+
+# 4.2 Great Britain
+
+# 4.3 England, Wales, Scotland
+
+# 4.4 Regions
+
 
 UK_house_price_plot_data <- UK_house_price_date_fmt %>% select(date_fmt,united_kingdom)
 UK_house_price_plot_data
