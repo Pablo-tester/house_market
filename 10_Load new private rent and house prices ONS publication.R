@@ -137,22 +137,49 @@ write.csv(REGIONS_House_price_fmted,here("cleansed_data","REGIONS_House_price_fm
 # Remove previous dataframes. Keeping just House_price_data_raw and UK_House_price_fmted,GB_House_price_fmted,COUNTRIES_House_price_fmted,REGIONS_House_price_fmted
 rm(list=ls()[! ls() %in% c("House_price_data_raw","UK_House_price_fmted","GB_House_price_fmted","COUNTRIES_House_price_fmted","REGIONS_House_price_fmted")])
 
-# 5. Plot house price data for UK 
-# 5. Plot UK house price time series data
-min_date <- min(UK_house_price_plot_data$date_fmt)
-max_date <- max(UK_house_price_plot_data$united_kingdom)
 
-install.packages("wesanderson",dependencies = TRUE)
-library(wesanderson)
+
+# 5. Plot house price data for UK 
+
+# Dataset: UK_House_price_fmted
+
+# 5. Plot UK house price time series data
+min_date <- min(UK_House_price_fmted$date_fmt)
+max_date <- max(UK_House_price_fmted$date_fmt)
+
+min_date
+max_date
+
+#> min_date
+#[1] "202-06-01"
+#> max_date
+#[1] "2025-07-01"
 
 # Setup color palette manually
 # scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
-install.packages("viridis",dependencies = TRUE)
+# install.packages("viridis",dependencies = TRUE)
+library(wesanderson) #  blog Wes Anderson Palettes.  https://github.com/karthik/wesanderson
 library(viridis)
 
-UK_monthly_house_price_plot <- ggplot(data = UK_house_price_plot_data, aes( x = date_fmt, y = united_kingdom)) + 
+# 5.1 Plot UK House Prices using ggplot2
+str(UK_House_price_fmted)
+
+# Testing final plot details
+plot_checks <- UK_House_price_fmted %>% filter(date_fmt >= '2011-01-01' & date_fmt <= '2011-12-01')
+plot_checks
+nrow(plot_checks) 
+
+test_UK_price_plot <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+       subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
+  geom_line(color = "darkgreen") 
+test_UK_price_plot
+
+# UK House price plot 
+
+UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
-   labs(title ="UK Average house prices into reverse from last year all time high",
+   labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-July 2025",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
