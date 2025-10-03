@@ -65,11 +65,14 @@ time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
 names(House_price_data_raw)
 
 fixing_time_period_01 <- House_price_data_raw %>% 
-                            mutate(date_clean =  str_sub(time_period, 1, 8)) %>% 
-                            select(date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+                            mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
+                            select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
                                    north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
 
 fixing_time_period_01
+
+check_new_cols_period_01 <- fixing_time_period_01 %>%  select(time_period,date_clean)
+check_new_cols_period_01
 
 # 3. CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
 
@@ -80,13 +83,15 @@ fixing_time_period_01
 library(stringr)
 
 
-fixing_time_period_02 <- fixing_time_perio_01 %>% 
+fixing_time_period_02 <- fixing_time_period_01 %>% 
                   mutate(
                     day = '01',
                     year = str_sub(date_clean, -4, -1),
                          month = str_sub(date_clean, 1,3)) 
 fixing_time_period_02
 
+check_new_cols <- fixing_time_period_02 %>%  select(date_clean,day,month,year)
+check_new_cols
 # 3.2 Then using ymd() function from  {lubridate} package, build the date format new date variable.
 
 # Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
