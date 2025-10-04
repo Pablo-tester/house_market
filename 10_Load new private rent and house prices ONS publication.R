@@ -113,8 +113,8 @@ names(fixing_time_period_04_FIRST_HALF)
 #[16] "west_midlands"            "east"                     "london"                   "south_east"               "south_west"   
 
 House_prices_FIRST_HALF_DATE_FMTD <- fixing_time_period_04_FIRST_HALF %>% 
-  select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
-         "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
+                                      select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
+                                             "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
 
 rm(fixing_time_period_01_FIRST_HALF,
    fixing_time_period_02_FIRST_HALF,
@@ -127,28 +127,35 @@ library(stringr)
 library(lubridate)
 
 fixing_time_period_01_SECOND_HALF <- Second_section_data_raws_163_175 %>% 
-  mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
-  select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
-         north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west) %>% 
-  mutate(
-    day = '01',
-    year = str_sub(date_clean, -4, -1),
-    month = str_sub(date_clean, 1,3)) %>% 
-  mutate(date = paste0(year,"/",month,"/",day))
+                                      mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
+                                      select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+                                             north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west) %>% 
+                                      mutate(
+                                        day = '01',
+                                        year = str_sub(date_clean, -6, -1),
+                                        month = str_sub(date_clean, 1,3)) %>% 
+                                      mutate(date = paste0(year,"/",month,"/",day))
 
 # Then we can apply ymd(date) function from lubridate 
 fixing_time_period_02_SECOND_HALF <- fixing_time_period_01_SECOND_HALF %>%  
                                       mutate(date_fmt = ymd(date)) %>% 
                                       select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
                                              "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
+House_prices_SECOND_HALF_DATE_FMTD <- fixing_time_period_02_SECOND_HALF
+
+# 5. Then we can union both halves as they have not the correct date format applied to the newly created date_fmt colum, using {stringr} and {lubridate} packages:
+# We union two dataframes with same columns in R using {dplyr} bind_rows(df1, df2) function 
+House_price_data_FMTD <- bind_rows(House_prices_FIRST_HALF_DATE_FMTD,
+                                   House_prices_SECOND_HALF_DATE_FMTD)
+
+House_price_data_FMTD
 
 
-
-# 3.3 Save this date formatted dataframe as .csv file 
+# 6. Save this date formatted dataframe as .csv file 
 # Save time period formatted column dataframe in a new "cleansed_data" sub-folder in my WD
 here()
 if(!dir.exists("cleansed_data")){dir.create("cleansed_data")}
-write.csv(data_UK_House_Price_Inde_cleansed,here("cleansed_data","data_UK_House_Price_Inde_cleansed.csv"), row.names = TRUE)
+write.csv(House_price_data_FMTD,here("cleansed_data","House_price_data_FMTD.csv"), row.names = TRUE)
 
 
 # 4. Split initial House Price index dataset into different geographies
