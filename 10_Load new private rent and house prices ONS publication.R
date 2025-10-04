@@ -191,7 +191,7 @@ max_date <- max(UK_House_price_fmted$date_fmt)
 library(wesanderson) #  blog Wes Anderson Palettes.  https://github.com/karthik/wesanderson
 library(viridis)
 
-# 5.1 Plot UK House Prices using ggplot2
+# 8.1 Plot UK House Prices using ggplot2
 str(UK_House_price_fmted)
 
 # Testing final plot details
@@ -219,7 +219,7 @@ test_UK_price_plot_2025 <- ggplot(data = plot_checks_2025, aes( x = date_fmt, y 
 UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
    labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011- July 2025",
-       subtitle = "Source:ONS.Private rent and house prices, UK: September 2025",
+       subtitle = "Source: ONS-Private rent and house prices- UK:September 2025",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
  scale_y_continuous(breaks = seq(0,300000, by = 20000)) +
@@ -231,3 +231,27 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
 UK_monthly_house_price_plot
 
 ggsave(paste0("plots/19_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+# 9. Compute Month over month percent change and year over year percent change
+# For UK House prices
+UK_House_price_changes <- UK_House_price_fmted %>% 
+                          select(date_fmt, 
+                                 UK_house_price = united_kingdom)
+
+names(UK_House_price_changes)
+
+UK_House_price_changes_calc  <- UK_House_price_changes %>%  
+  mutate(
+    MoM_n = UK_house_price - lag(UK_house_price,1),
+    MoM_perc = ((UK_house_price - lag(UK_house_price,1))/lag(UK_house_price,1)*100),
+    MoM_percr = round(((UK_house_price - lag(UK_house_price,1))/lag(UK_house_price,1)*100),2),
+    YoY_n = UK_house_price - lag(UK_house_price,12),
+    YoY_perc = ((UK_house_price - lag(UK_house_price,12))/lag(UK_house_price,12)*100),
+    YoY_percr = round(((UK_house_price - lag(UK_house_price,12))/lag(UK_house_price,12)*100),2),
+    Price_change_m = ifelse(MoM_percr < 0,"Drops","Increses"),
+    Price_change_y = ifelse(YoY_percr < 0,"Drops","Increses")
+    # ifelse(a %% 2 == 0,"even","odd")
+  )
+UK_House_price_changes_calc 
+
+
