@@ -258,36 +258,58 @@ UK_House_price_changes_calc  <- UK_House_price_changes %>%
 UK_House_price_changes_calc 
 
 # 10. Creating chart for MoM and YoY UK House price changes for Jan 2011- July 2025 period.
+# Pivot longer  previous dataset
+# using pivot_longer() function from {tidyr} package
+# https://tidyr.tidyverse.org/reference/pivot_longer.html
+
+# Note: I have created a similar plot to this one below in this script: 
+# https://github.com/Pablo-tester/house_market/blob/main/01_House_price_UK_descriptive_analysis_R_scripts/04_House_price_change_plots.R
+
+
+# 10.1 Select YoY_perc_change and MoM_perc_change from previous data and pivot dataset fropm wide to LONG format:
+library(tidyr)
 
 Price_change_data <- UK_House_price_changes_calc %>% 
   select(date_fmt,YoY_perc_change = YoY_percr,MoM_perc_change = MoM_percr)%>% 
-  pivot_longer(cols = !datef,
+  pivot_longer(cols = !date_fmt,
                names_to = "metric",values_to = "percent")
 
-# 4.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
-endv <- group_by(Price_change_labels, metric) %>% filter(datef == max(datef))
+# 10.2 Create new labels required to populate the final chart (these are adhoc labels that will replace existing ggplot2 labels. )
+Price_change_labels <- Price_change_data %>% 
+  select(date_fmt,metric_reode = metric,percent) %>% 
+  mutate(metric = recode(metric_reode,
+                               YoY_perc_change = "YoY percent change",
+                               MoM_perc_change = "MoM percent change"))
+
+Price_change_labels_plot <- Price_change_labels %>%  select(date_fmt,metric,percent)
+
+
+# 10.3 Compute reference point (latest value) for each series (MoM and YoY percent change)
+endv <- group_by(Price_change_labels, metric) %>% 
+        filter(date_fmt == max(date_fmt)) %>% 
+        select(date_fmt,metric,percent)
 endv
 
-UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
+
+# 11.Final plot displaying MoM and YoY percent change UK House price for July 2011-July 2025 period. 
+
+UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
   
   geom_line() +
   # Adding end value metric dot shape and label
   geom_point(data = endv, col = 'darkgray') +
   geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
-  
-  labs(title ="UK Average house prices into reverse from last year all time high",
-       subtitle = "UK YoY percent price change. ONS UK House Price Index: December 2023",
+    labs(title ="UK Average house prices into reverse from last year all time high. July 2011-July 2025",
+       subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
   scale_y_continuous(breaks = seq(-16,16, by = 2)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
   theme(
-    # legend position = "none", "left", "right", "bottom","top"
-    # legend.position = c(X,Y)
-    legend.position = c(.88,.15),
+    legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
 
-yoy_perc_endv
+UK_House_price_yoy_perc_endv
 
 
