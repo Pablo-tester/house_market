@@ -150,47 +150,35 @@ House_price_data_FMTD <- bind_rows(House_prices_FIRST_HALF_DATE_FMTD,
 
 House_price_data_FMTD
 
-
 # 6. Save this date formatted dataframe as .csv file 
 # Save time period formatted column dataframe in a new "cleansed_data" sub-folder in my WD
 here()
 if(!dir.exists("cleansed_data")){dir.create("cleansed_data")}
-write.csv(House_price_data_FMTD,here("cleansed_data","House_price_data_FMTD.csv"), row.names = TRUE)
+write.csv(House_price_data_FMTD,here("cleansed_data","UK_House_price_data_FMTD_Jan_2011_July_2025.csv"), row.names = TRUE)
 
-
-# 4. Split initial House Price index dataset into different geographies
-
-# 4.1 United Kingdom
-UK_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,united_kingdom)
+# 7. Split initial House Price index dataset into different geographies
+# 7.1 United Kingdom
+UK_House_price_fmted <- House_price_data_FMTD %>% select(date_fmt,united_kingdom)
 write.csv(UK_House_price_fmted,here("cleansed_data","UK_House_price_fmted.csv"), row.names = TRUE)
-
-# 4.2 Great Britain
-GB_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,great_britain)
+# 7.2 Great Britain
+GB_House_price_fmted <- House_price_data_FMTD %>% select(date_fmt,great_britain)
 write.csv(GB_House_price_fmted,here("cleansed_data","GB_House_price_fmted.csv"), row.names = TRUE)
-
-# 4.3 GB Countries - England, Wales, Scotland
-COUNTRIES_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,england,wales,scotland,northern_ireland_note_3)
+# 7.3 GB Countries - England, Wales, Scotland
+COUNTRIES_House_price_fmted <- House_price_data_FMTD %>% select(date_fmt,england,wales,scotland,northern_ireland_note_3)
 write.csv(COUNTRIES_House_price_fmted,here("cleansed_data","COUNTRIES_House_price_fmted.csv"), row.names = TRUE)
-
-# 4.4 Regions
-REGIONS_House_price_fmted <- fixing_time_period_04 %>% select(date_fmt,north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
+# 7.4 Regions
+REGIONS_House_price_fmted <- House_price_data_FMTD %>% select(date_fmt,north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
 write.csv(REGIONS_House_price_fmted,here("cleansed_data","REGIONS_House_price_fmted.csv"), row.names = TRUE)
-
 # Remove previous dataframes. Keeping just House_price_data_raw and UK_House_price_fmted,GB_House_price_fmted,COUNTRIES_House_price_fmted,REGIONS_House_price_fmted
 rm(list=ls()[! ls() %in% c("House_price_data_raw","UK_House_price_fmted","GB_House_price_fmted","COUNTRIES_House_price_fmted","REGIONS_House_price_fmted")])
 
 
+# 8. Plot house price data for UK 
 
-# 5. Plot house price data for UK 
-
-# Dataset: UK_House_price_fmted
-
+# Data set: UK_House_price_fmted
 # 5. Plot UK house price time series data
 min_date <- min(UK_House_price_fmted$date_fmt)
 max_date <- max(UK_House_price_fmted$date_fmt)
-
-min_date
-max_date
 
 #> min_date
 #[1] "202-06-01"
@@ -207,15 +195,24 @@ library(viridis)
 str(UK_House_price_fmted)
 
 # Testing final plot details
-plot_checks <- UK_House_price_fmted %>% filter(date_fmt >= '2011-01-01' & date_fmt <= '2011-12-01')
-plot_checks
-nrow(plot_checks) 
+plot_checks_2011 <- UK_House_price_fmted %>% filter(date_fmt >= '2011-01-01' & date_fmt <= '2011-12-01')
+plot_checks_2023 <- UK_House_price_fmted %>% filter(date_fmt >= '2023-01-01' & date_fmt <= '2023-12-01')
+plot_checks_2025 <- UK_House_price_fmted %>% filter(date_fmt >= '2025-01-01' & date_fmt <= '2025-07-01')
 
-test_UK_price_plot <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
+test_UK_price_plot_2011 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
   labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
   geom_line(color = "darkgreen") 
-test_UK_price_plot
+
+test_UK_price_plot_2023 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+       subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
+  geom_line(color = "darkblue") 
+
+test_UK_price_plot_2025 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+       subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
+  geom_line(color = "orange") 
 
 # UK House price plot 
 
