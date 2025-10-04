@@ -138,7 +138,10 @@ fixing_time_period_01_SECOND_HALF <- Second_section_data_raws_163_175 %>%
 
 # Then we can apply ymd(date) function from lubridate 
 fixing_time_period_02_SECOND_HALF <- fixing_time_period_01_SECOND_HALF %>%  
-  mutate(date_fmt = ymd(date)) %>% 
+                                      mutate(date_fmt = ymd(date)) %>% 
+                                      select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
+                                             "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
+
 
 
 # 3.3 Save this date formatted dataframe as .csv file 
