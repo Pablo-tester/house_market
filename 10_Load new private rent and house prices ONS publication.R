@@ -234,6 +234,9 @@ ggsave(paste0("plots/19_Average_UK_House_Price_ONS_private_rent_and_house_prices
 
 # 9. Compute Month over month percent change and year over year percent change
 # For UK House prices
+
+rm(list=ls()[! ls() %in% c("UK_House_price_fmted","GB_House_price_fmted","COUNTRIES_House_price_fmted","REGIONS_House_price_fmted")])
+
 UK_House_price_changes <- UK_House_price_fmted %>% 
                           select(date_fmt, 
                                  UK_house_price = united_kingdom)
@@ -244,14 +247,47 @@ UK_House_price_changes_calc  <- UK_House_price_changes %>%
   mutate(
     MoM_n = UK_house_price - lag(UK_house_price,1),
     MoM_perc = ((UK_house_price - lag(UK_house_price,1))/lag(UK_house_price,1)*100),
-    MoM_percr = round(((UK_house_price - lag(UK_house_price,1))/lag(UK_house_price,1)*100),2),
+    MoM_percr = round(((UK_house_price - lag(UK_house_price,1))/lag(UK_house_price,1)*100),2), # We will use this calculation  in next section
     YoY_n = UK_house_price - lag(UK_house_price,12),
-    YoY_perc = ((UK_house_price - lag(UK_house_price,12))/lag(UK_house_price,12)*100),
+    YoY_perc = ((UK_house_price - lag(UK_house_price,12))/lag(UK_house_price,12)*100),    # We will use this calculation  in next section
     YoY_percr = round(((UK_house_price - lag(UK_house_price,12))/lag(UK_house_price,12)*100),2),
     Price_change_m = ifelse(MoM_percr < 0,"Drops","Increses"),
     Price_change_y = ifelse(YoY_percr < 0,"Drops","Increses")
     # ifelse(a %% 2 == 0,"even","odd")
   )
 UK_House_price_changes_calc 
+
+# 10. Creating chart for MoM and YoY UK House price changes for Jan 2011- July 2025 period.
+
+Price_change_data <- UK_House_price_changes_calc %>% 
+  select(date_fmt,YoY_perc_change = YoY_percr,MoM_perc_change = MoM_percr)%>% 
+  pivot_longer(cols = !datef,
+               names_to = "metric",values_to = "percent")
+
+# 4.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
+endv <- group_by(Price_change_labels, metric) %>% filter(datef == max(datef))
+endv
+
+UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels, aes( x = datef, y = percent, color = metric_label )) + 
+  
+  geom_line() +
+  # Adding end value metric dot shape and label
+  geom_point(data = endv, col = 'darkgray') +
+  geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  
+  labs(title ="UK Average house prices into reverse from last year all time high",
+       subtitle = "UK YoY percent price change. ONS UK House Price Index: December 2023",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  scale_y_continuous(breaks = seq(-16,16, by = 2)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme_bw() + 
+  theme(
+    # legend position = "none", "left", "right", "bottom","top"
+    # legend.position = c(X,Y)
+    legend.position = c(.88,.15),
+    legend.title=element_blank()) # removed legend title
+
+yoy_perc_endv
 
 
