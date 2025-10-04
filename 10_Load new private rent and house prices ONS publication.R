@@ -199,18 +199,18 @@ plot_checks_2011 <- UK_House_price_fmted %>% filter(date_fmt >= '2011-01-01' & d
 plot_checks_2023 <- UK_House_price_fmted %>% filter(date_fmt >= '2023-01-01' & date_fmt <= '2023-12-01')
 plot_checks_2025 <- UK_House_price_fmted %>% filter(date_fmt >= '2025-01-01' & date_fmt <= '2025-07-01')
 
-test_UK_price_plot_2011 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
-  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+test_UK_price_plot_2011 <- ggplot(data = plot_checks_2011, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2011",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
   geom_line(color = "darkgreen") 
 
-test_UK_price_plot_2023 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
-  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+test_UK_price_plot_2023 <- ggplot(data = plot_checks_2023, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2023-Dec 2023",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
   geom_line(color = "darkblue") 
 
-test_UK_price_plot_2025 <- ggplot(data = plot_checks, aes( x = date_fmt, y = united_kingdom )) + 
-  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-Dec 2025",
+test_UK_price_plot_2025 <- ggplot(data = plot_checks_2025, aes( x = date_fmt, y = united_kingdom )) + 
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2025-Jul 2025",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025") +
   geom_line(color = "orange") 
 
@@ -218,7 +218,7 @@ test_UK_price_plot_2025 <- ggplot(data = plot_checks, aes( x = date_fmt, y = uni
 
 UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
-   labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011-July 2025",
+   labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011- July 2025",
        subtitle = "Source:ONS.Private rent and house prices, UK: September 2025",
        # Change X and Y axis labels
        x = "Year", y = "House price change (%)" ) +
@@ -230,4 +230,4 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
     legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
 
-ggsave(paste0("plots/18_Average_UK_House_Price_ONS_private_rent_and_house_prices_SEP2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/19_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
