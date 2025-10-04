@@ -57,18 +57,18 @@ names(House_price_data_raw)
 # 2 Split Dataframe to treat trailing [r] character at the end: 
 # From raw 1 to raw 162. Then I will union this dataframe to the last section from 163 to 175 
 
-First_section_data_raws_01_165 <- House_price_data_raw %>% 
+First_section_data_raws_01_162 <- House_price_data_raw %>% 
                                   slice(1:162)
 
 Second_section_data_raws_163_175 <- House_price_data_raw %>% 
                                     slice(163:175)
 
-###   3.First_section_data_raws_01_165
+###   3.First_section_data_raws_01_162
 
 # 3.1 Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
 library(stringr)
 
-fixing_time_period_01_FIRST_HALF <- First_section_data_raws_01_165 %>% 
+fixing_time_period_01_FIRST_HALF <- First_section_data_raws_01_162 %>% 
                                     mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
                                     select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
                                     north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
@@ -84,7 +84,7 @@ fixing_time_period_02_FIRST_HALF  <- fixing_time_period_01_FIRST_HALF %>%
 
 fixing_time_period_02_FIRST_HALF
 
-check_new_cols <- fixing_time_period_02 %>%  select(date_clean,day,month,year)
+check_new_cols <- fixing_time_period_02_FIRST_HALF %>%  select(date_clean,day,month,year)
 check_new_cols 
 
 # 3.2  CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
@@ -95,7 +95,7 @@ library(lubridate)
 fixing_time_period_03_FIRST_HALF <- fixing_time_period_02_FIRST_HALF %>%  mutate(date = paste0(year,"/",month,"/",day))
 fixing_time_period_03_FIRST_HALF
 
-names(fixing_time_period_03)
+names(fixing_time_period_03_FIRST_HALF)
 
 fixing_time_period_04_FIRST_HALF <- fixing_time_period_03_FIRST_HALF %>%  
   mutate(date_fmt = ymd(date)) %>% 
@@ -104,52 +104,42 @@ fixing_time_period_04_FIRST_HALF <- fixing_time_period_03_FIRST_HALF %>%
          north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
 fixing_time_period_04_FIRST_HALF     
 
+# Keep just relevant colums from formatted fixing_time_period_04_FIRST_HALF dataframe: 
+names(fixing_time_period_04_FIRST_HALF)
+
+#[1] "date_fmt"                 "date"                     "day"                      "month"                    "year"                    
+#[6] "united_kingdom"           "great_britain"            "england"                  "wales"                    "scotland"                
+#[11] "northern_ireland_note_3"  "north_east"               "north_west"               "yorkshire_and_the_humber" "east_midlands"           
+#[16] "west_midlands"            "east"                     "london"                   "south_east"               "south_west"   
+
+House_prices_FIRST_HALF_DATE_FMTD <- fixing_time_period_04_FIRST_HALF %>% 
+  select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
+         "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
+
+rm(fixing_time_period_01_FIRST_HALF,
+   fixing_time_period_02_FIRST_HALF,
+   fixing_time_period_03_FIRST_HALF )
 
 
-# Second_section_data_raws_163_175
-
-
-
-
-# 3. CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
-
-# 3.1 Use str_sub() function from {stringr} package  to create individual day month year variables from initial date_clean string variable
-
-# I need to account for these dates  "Jul 2024 [r]" 
-# This [r] is not working with the above data manipulation !
+# 4 Second_section_data_raws_163_175
+# 4.1 Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
 library(stringr)
-
-
-fixing_time_period_02 <- fixing_time_period_01 %>% 
-                  mutate(
-                    day = '01',
-                    year = str_sub(date_clean, -4, -1),
-                         month = str_sub(date_clean, 1,3)) 
-fixing_time_period_02
-
-check_new_cols <- fixing_time_period_02 %>%  select(date_clean,day,month,year)
-check_new_cols
-# 3.2 Then using ymd() function from  {lubridate} package, build the date format new date variable.
-
-# Now I can turn the above three columns "day", "month" and "year" into a Date column using {lubridate}
 library(lubridate)
-fixing_time_period_03 <- fixing_time_period_02 %>%  mutate(date = paste0(year,"/",month,"/",day))
 
-names(fixing_time_period_03)
+fixing_time_period_01_SECOND_HALF <- Second_section_data_raws_163_175 %>% 
+  mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
+  select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+         north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west) %>% 
+  mutate(
+    day = '01',
+    year = str_sub(date_clean, -4, -1),
+    month = str_sub(date_clean, 1,3)) %>% 
+  mutate(date = paste0(year,"/",month,"/",day))
 
-#[1] "date_clean"               "united_kingdom"           "great_britain"            "england"                  "wales"                    "scotland"                 "northern_ireland_note_3" 
-#[8] "north_east"               "north_west"               "yorkshire_and_the_humber" "east_midlands"            "west_midlands"            "east"                     "london"                  
-#[15] "south_east"               "south_west"               "day"                      "year"                     "month"                    "date"   
+# Then we can apply ymd(date) function from lubridate 
+fixing_time_period_02_SECOND_HALF <- fixing_time_period_01_SECOND_HALF %>%  
+  mutate(date_fmt = ymd(date)) %>% 
 
-# Parse dates using ymd() lubridate function:
-fixing_time_period_04 <- fixing_time_period_03 %>%  
-                         mutate(date_fmt = ymd(date)) %>% 
-                         select(date_fmt,date,day,month,year,
-                                united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
-                                north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
-fixing_time_period_04                     
-
-data_UK_House_Price_Inde_cleansed <- fixing_time_period_04
 
 # 3.3 Save this date formatted dataframe as .csv file 
 # Save time period formatted column dataframe in a new "cleansed_data" sub-folder in my WD
