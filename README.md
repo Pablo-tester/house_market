@@ -55,6 +55,10 @@ Included reference point (latest value) for each series (MoM and YoY percent cha
 
 ![03_UK_MoM_and_YoY_price_change_DEC2023_env_MARK](https://github.com/Pablo-tester/house_market/assets/140793883/b2a5009c-0edc-48f5-8582-86a3bca68ca1)
 
+Updated previous chart with ONS UK House Price Index. Latest available data from September 2025.
+
+![20_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025_end_value](https://github.com/user-attachments/assets/dc859dae-3c7f-4fcb-9ae4-e4900bc92c8f)
+
 
 ## 2. Univariate TS modelling using TSstudio
 
