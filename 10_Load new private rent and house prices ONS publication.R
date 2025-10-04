@@ -63,9 +63,9 @@ First_section_data_raws_01_165 <- House_price_data_raw %>%
 Second_section_data_raws_163_175 <- House_price_data_raw %>% 
                                     slice(163:175)
 
-# First_section_data_raws_01_165
+###   3.First_section_data_raws_01_165
 
-# 3. Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
+# 3.1 Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
 library(stringr)
 
 fixing_time_period_01_FIRST_HALF <- First_section_data_raws_01_165 %>% 
@@ -76,49 +76,40 @@ fixing_time_period_01_FIRST_HALF <- First_section_data_raws_01_165 %>%
 check_new_cols_period_01_FIRST_HALF  <- fixing_time_period_01_FIRST_HALF %>%  select(time_period,date_clean)
 check_new_cols_period_01_FIRST_HALF
 
-library(stringr)
-
-
-fixing_time_period_02 <- fixing_time_period_01 %>% 
+fixing_time_period_02_FIRST_HALF  <- fixing_time_period_01_FIRST_HALF %>% 
   mutate(
     day = '01',
     year = str_sub(date_clean, -4, -1),
     month = str_sub(date_clean, 1,3)) 
-fixing_time_period_02
+
+fixing_time_period_02_FIRST_HALF
 
 check_new_cols <- fixing_time_period_02 %>%  select(date_clean,day,month,year)
 check_new_cols 
 
+# 3.2  CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
+library(lubridate)
 
+# Now I can turn the above three columns "day", "month" and "year" into a Date column using function ymd(date) from  {lubridate} library
 
+fixing_time_period_03_FIRST_HALF <- fixing_time_period_02_FIRST_HALF %>%  mutate(date = paste0(year,"/",month,"/",day))
+fixing_time_period_03_FIRST_HALF
 
+names(fixing_time_period_03)
 
+fixing_time_period_04_FIRST_HALF <- fixing_time_period_03_FIRST_HALF %>%  
+  mutate(date_fmt = ymd(date)) %>% 
+  select(date_fmt,date,day,month,year,
+         united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
+         north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
+fixing_time_period_04_FIRST_HALF     
 
 
 
 # Second_section_data_raws_163_175
 
-# 
 
-# 2. Address latest rows containing 1 Feb 2025 [r] character in "time_period" column: 
-Original_date_fix <- House_price_data_raw
 
-time_period_values <- Original_date_fix %>% select(time_period) %>% distinct()
-
-# From row 163 to row 175, time_period column contains an extra [r] character:
-# I will split initial Original_date_fix into two halves to fix rows with trailing character
-
-names(House_price_data_raw)
-
-fixing_time_period_01 <- House_price_data_raw %>% 
-                            mutate(date_clean =  str_sub(time_period, 1, 9)) %>%  # Subtract from 1 to 9 to get full year month values
-                            select(time_period,date_clean,united_kingdom,great_britain,england,wales,scotland,northern_ireland_note_3,
-                                   north_east,north_west,yorkshire_and_the_humber,east_midlands,west_midlands,east,london,south_east,south_west)
-
-fixing_time_period_01
-
-check_new_cols_period_01 <- fixing_time_period_01 %>%  select(time_period,date_clean)
-check_new_cols_period_01
 
 # 3. CREATE NEW DATE FORMAT VARIABLE USING LUBRIDATE
 
