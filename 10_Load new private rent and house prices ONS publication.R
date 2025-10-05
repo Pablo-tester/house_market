@@ -374,7 +374,7 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   theme_bw() + 
   geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
   theme(
-    legend.position = c(.90,+.80),
+    legend.position = c(.20,+.80),
     legend.title=element_blank()) # removed legend title
 
 UK_House_price_yoy_perc_endv
