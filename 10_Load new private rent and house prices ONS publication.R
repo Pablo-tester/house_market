@@ -313,3 +313,6 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
 UK_House_price_yoy_perc_endv
 
 
+ggsave(paste0("plots/20_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025_end_value.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
+
