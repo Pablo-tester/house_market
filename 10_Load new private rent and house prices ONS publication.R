@@ -353,13 +353,13 @@ UK_monthly_house_price_plot
 Price_change_labels_plot <- Price_change_labels %>%  select(date_fmt,metric,percent)
 
 
-# 10.3 Compute reference point (latest value) for each series (MoM and YoY percent change)
+# 12.2.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
 endv_perc_change <- group_by(Price_change_labels, metric) %>% 
   filter(date_fmt == max(date_fmt)) %>% 
   select(date_fmt,metric,percent)
 endv_perc_change
 
-# Add labels to percent change plot ofr UK House price 
+# 12.2.2 Add labels to percent change plot ofr UK House price 
 UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
   geom_line() +
   # Adding end value metric dot shape and label
@@ -378,7 +378,9 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
 
 UK_House_price_yoy_perc_endv
 
-GRID_PLOT <-grid.arrange(AVG_HPRICE_grid,CHG_HPRICE_grid,ncol=2)
+# 12.3 Using grid.arrange() function from {gridExtra} package, combine both previous charts into a single .jpeg file.
+library(gridExtra)
+GRID_UK_HOUSE_PRICE_PLOT <-grid.arrange(UK_monthly_house_price_plot,UK_House_price_yoy_perc_endv,ncol=2)
 
 
 ggsave(paste0("plots/21_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
