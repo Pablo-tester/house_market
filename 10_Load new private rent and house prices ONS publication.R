@@ -372,6 +372,7 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   scale_y_continuous(breaks = seq(-16,16, by = 2)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
+  geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
   theme(
     legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
@@ -383,5 +384,5 @@ library(gridExtra)
 GRID_UK_HOUSE_PRICE_PLOT <-grid.arrange(UK_monthly_house_price_plot,UK_House_price_yoy_perc_endv,ncol=2)
 
 
-ggsave(paste0("plots/21_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/22_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
