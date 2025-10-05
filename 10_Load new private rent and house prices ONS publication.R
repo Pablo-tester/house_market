@@ -320,6 +320,12 @@ ggsave(paste0("plots/20_Average_UK_House_Price_ONS_private_rent_and_house_prices
 # Created a grid of 2 columns to display both charts on same png file
 
 # 12.1 UK Monthly House price
+
+# 12.1.1 Including end value
+UK_House_price_latest_value <- UK_House_price_fmted  %>%  select(date_fmt,united_kingdom)
+endv <- UK_House_price_latest_value %>% filter(date_fmt == max(date_fmt))
+
+
 UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
   labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011- July 2025",
