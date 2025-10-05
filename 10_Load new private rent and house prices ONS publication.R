@@ -342,18 +342,29 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   # First I include a dot at the end of the existing geom_line chart
   geom_point(data = endv, col = 'mediumpurple2') +
   # End value label (date and value)
-  geom_text(data = endv, aes(label = date_fmt), hjust =1.9, nudge_x = 5,vjust = 1.0) +
-  geom_text(data = endv, aes(label = paste0("Most recent value: ",united_kingdom), hjust = 1.5, nudge_x = 5,vjust = -1)) 
-
+  # This is the date label
+  geom_text(data = endv, aes(label = date_fmt), hjust =1.6, nudge_x = 5,vjust = 1.0) +
+  # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
+  geom_text(data = endv, aes(label = paste0("Most recent value (dot): ",format( united_kingdom, big.mark = ",", scientific = FALSE)), 
+                             hjust = 1.0, nudge_x = 5,vjust = -1)) 
 UK_monthly_house_price_plot
 
 # 12.2 UK MoM and YoY average House price change
+Price_change_labels_plot <- Price_change_labels %>%  select(date_fmt,metric,percent)
+
+
+# 10.3 Compute reference point (latest value) for each series (MoM and YoY percent change)
+endv_perc_change <- group_by(Price_change_labels, metric) %>% 
+  filter(date_fmt == max(date_fmt)) %>% 
+  select(date_fmt,metric,percent)
+endv_perc_change
+
+# Add labels to percent change plot ofr UK House price 
 UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
-  
   geom_line() +
   # Adding end value metric dot shape and label
-  geom_point(data = endv, col = 'darkgray') +
-  geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  geom_point(data = endv_perc_change, col = 'darkgray') +
+  geom_text(data = endv_perc_change, aes(label = percent), hjust = -0.4, nudge_x = 2) +
   labs(title ="UK Average house prices show positive growth from last year small drop. July 2011-July 2025",
        subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
        # Change X and Y axis labels
