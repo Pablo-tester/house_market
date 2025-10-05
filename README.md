@@ -59,6 +59,10 @@ Updated previous chart with ONS UK House Price Index. Latest available data from
 
 ![20_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025_end_value](https://github.com/user-attachments/assets/dc859dae-3c7f-4fcb-9ae4-e4900bc92c8f)
 
+Updated charts for UK Average house prices and MoM and YoY percent change. Source: ONS UK House Price Index. Jan 2011- July 2025 period. September 2025 data. 
+<img width="1332" height="949" alt="24_Average_and_MoM_YoU_UK_House_price_Jan_2011_July_2025" src="https://github.com/user-attachments/assets/455219f2-ba52-49c2-bfa9-8ad32c8e966d" />
+
+
 
 ## 2. Univariate TS modelling using TSstudio
 
