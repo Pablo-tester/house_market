@@ -317,4 +317,45 @@ ggsave(paste0("plots/20_Average_UK_House_Price_ONS_private_rent_and_house_prices
 
 # 12. Combining YoY and MoM UK Average House price change with UK Average House price
 
+# Created a grid of 2 columns to display both charts on same png file
+
+# 12.1 UK Monthly House price
+UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
+  geom_line(color = "mediumpurple2") +
+  labs(title ="UK Average house prices into reverse from last year all time high. Jan 2011- July 2025",
+       subtitle = "Source: ONS-Private rent and house prices- UK:September 2025",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  scale_y_continuous(breaks = seq(0,300000, by = 20000)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  scale_color_viridis(discrete=TRUE) +
+  theme_bw() + 
+  theme(legend.position = c(.88,.15),
+        legend.title=element_blank()) # removed legend title
+UK_monthly_house_price_plot
+
+# 12.2 UK MoM and YoY average House price change
+UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
+  
+  geom_line() +
+  # Adding end value metric dot shape and label
+  geom_point(data = endv, col = 'darkgray') +
+  geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  labs(title ="UK Average house prices show positive growth from last year small drop. July 2011-July 2025",
+       subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
+       # Change X and Y axis labels
+       x = "Year", y = "House price change (%)" ) +
+  scale_y_continuous(breaks = seq(-16,16, by = 2)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme_bw() + 
+  theme(
+    legend.position = c(.90,+.80),
+    legend.title=element_blank()) # removed legend title
+
+UK_House_price_yoy_perc_endv
+
+GRID_PLOT <-grid.arrange(AVG_HPRICE_grid,CHG_HPRICE_grid,ncol=2)
+
+
+ggsave(paste0("plots/21_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
