@@ -338,13 +338,12 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   theme_bw() + 
   theme(legend.position = c(.88,.15),
         legend.title=element_blank()) +  # removed legend title
-  
   # Introduce Latest UK House price value label 
   # First I include a dot at the end of the existing geom_line chart
   geom_point(data = endv, col = 'mediumpurple2') +
   # End value label (date and value)
-  geom_text(data = endv, aes(label = Date), hjust =1.9, nudge_x = 5,vjust = 1.0) +
-  geom_text(data = endv, aes(label = paste0("Most recent value: ",bank_rate_n), hjust = 1.5, nudge_x = 5,vjust = -1)) +
+  geom_text(data = endv, aes(label = date_fmt), hjust =1.9, nudge_x = 5,vjust = 1.0) +
+  geom_text(data = endv, aes(label = paste0("Most recent value: ",united_kingdom), hjust = 1.5, nudge_x = 5,vjust = -1)) 
 
 UK_monthly_house_price_plot
 
