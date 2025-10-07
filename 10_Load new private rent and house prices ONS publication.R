@@ -384,5 +384,5 @@ library(gridExtra)
 GRID_UK_HOUSE_PRICE_PLOT <-grid.arrange(UK_monthly_house_price_plot,UK_House_price_yoy_perc_endv,ncol=2)
 
 
-ggsave(paste0("plots/24_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/22_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
