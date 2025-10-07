@@ -293,9 +293,13 @@ endv
 
 # 11.Final plot displaying MoM and YoY percent change UK House price for July 2011-July 2025 period. 
 
-UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
   
-  geom_line() +
+# WIP: Introduce reference line at 0.  In the plot below for MoM and YoY house price changes.
+# Between theme_wb() and theme() functions
+# geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
+
+UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) +   
+geom_line() +
   # Adding end value metric dot shape and label
   geom_point(data = endv, col = 'darkgray') +
   geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
@@ -309,7 +313,6 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   theme(
     legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
-
 UK_House_price_yoy_perc_endv
 
 
