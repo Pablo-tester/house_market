@@ -310,6 +310,7 @@ geom_line() +
   scale_y_continuous(breaks = seq(-16,16, by = 2)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
+  geom_hline(yintercept = 0, linewidth = 0.3)  + 
   theme(
     legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
