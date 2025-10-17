@@ -59,9 +59,9 @@ Updated previous chart with ONS UK House Price Index. Latest available data from
 
 ![23_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025](https://github.com/user-attachments/assets/c798c4ce-0647-4b07-a75f-e4d6ce210969)
 
-
 Updated charts for UK Average house prices and MoM and YoY percent change. Source: ONS UK House Price Index. Jan 2011- July 2025 period. September 2025 data. 
-<img width="1332" height="949" alt="24_Average_and_MoM_YoU_UK_House_price_Jan_2011_July_2025" src="https://github.com/user-attachments/assets/455219f2-ba52-49c2-bfa9-8ad32c8e966d" />
+
+![Uploading 24_Average_and_MoM_YoU_UK_House_price_Jan_2011_July_2025.png…]()
 
 
 
