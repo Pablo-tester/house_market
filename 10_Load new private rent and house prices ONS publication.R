@@ -222,7 +222,7 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
   theme(panel.grid.minor = element_blank(), # Removing minor grid
-        panel.grid.major.x = element_blank(),
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
         legend.position = c(.88,.15),
         legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
@@ -309,6 +309,8 @@ geom_line() +
   theme_bw() + 
   geom_hline(yintercept = 0, linewidth = 0.3)  + # Add reference line at 0
   theme(
+    panel.grid.minor = element_blank(), # Removing minor grid
+    panel.grid.major.x = element_blank(), # Remove x axis grid 
     legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
 UK_House_price_yoy_perc_endv
@@ -337,7 +339,9 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
-  theme(legend.position = c(.88,.15),
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
+        legend.position = c(.88,.15),
         legend.title=element_blank()) +  # removed legend title
   # Introduce Latest UK House price value label 
   # First I include a dot at the end of the existing geom_line chart
@@ -374,9 +378,10 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
   geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
-  theme(
-    legend.position = c(.20,+.80),
-    legend.title=element_blank()) # removed legend title
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
+        legend.position = c(.20,+.80),
+        legend.title=element_blank()) # removed legend title
 
 UK_House_price_yoy_perc_endv
 
