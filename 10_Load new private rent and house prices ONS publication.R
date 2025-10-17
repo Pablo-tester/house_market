@@ -116,11 +116,6 @@ House_prices_FIRST_HALF_DATE_FMTD <- fixing_time_period_04_FIRST_HALF %>%
                                       select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
                                              "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
 
-rm(fixing_time_period_01_FIRST_HALF,
-   fixing_time_period_02_FIRST_HALF,
-   fixing_time_period_03_FIRST_HALF )
-
-
 # 4 Second_section_data_raws_163_175
 # 4.1 Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
 library(stringr)
@@ -226,8 +221,10 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
-  theme(legend.position = c(.88,.15),
-    legend.title=element_blank()) # removed legend title
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
+        legend.position = c(.88,.15),
+        legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
 
 ggsave(paste0("plots/19_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
@@ -293,9 +290,13 @@ endv
 
 # 11.Final plot displaying MoM and YoY percent change UK House price for July 2011-July 2025 period. 
 
-UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) + 
   
-  geom_line() +
+# WIP: Introduce reference line at 0.  In the plot below for MoM and YoY house price changes.
+# Between theme_wb() and theme() functions
+# geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
+
+UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) +   
+geom_line() +
   # Adding end value metric dot shape and label
   geom_point(data = endv, col = 'darkgray') +
   geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
@@ -306,25 +307,23 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   scale_y_continuous(breaks = seq(-16,16, by = 2)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
+  geom_hline(yintercept = 0, linewidth = 0.3)  + # Add reference line at 0
   theme(
+    panel.grid.minor = element_blank(), # Removing minor grid
+    panel.grid.major.x = element_blank(), # Remove x axis grid 
     legend.position = c(.90,+.80),
     legend.title=element_blank()) # removed legend title
-
 UK_House_price_yoy_perc_endv
 
 
 ggsave(paste0("plots/20_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025_end_value.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
 # 12. Combining YoY and MoM UK Average House price change with UK Average House price
-
 # Created a grid of 2 columns to display both charts on same png file
-
 # 12.1 UK Monthly House price
-
 # 12.1.1 Including end value
 UK_House_price_latest_value <- UK_House_price_fmted  %>%  select(date_fmt,united_kingdom)
 endv <- UK_House_price_latest_value %>% filter(date_fmt == max(date_fmt))
-
 
 UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
@@ -336,22 +335,21 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
-  theme(legend.position = c(.88,.15),
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
+        legend.position = c(.88,.15),
         legend.title=element_blank()) +  # removed legend title
-  # Introduce Latest UK House price value label 
-  # First I include a dot at the end of the existing geom_line chart
+  #  Introduce Latest UK House price value label .First I include a dot at the end of the existing geom_line chart
   geom_point(data = endv, col = 'mediumpurple2') +
   # End value label (date and value)
-  # This is the date label
   geom_text(data = endv, aes(label = date_fmt), hjust =1.6, nudge_x = 5,vjust = 1.0) +
-  # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
   geom_text(data = endv, aes(label = paste0("Most recent value (dot): ",format( united_kingdom, big.mark = ",", scientific = FALSE)), 
-                             hjust = 1.0, nudge_x = 5,vjust = -1)) 
+                             hjust = 1.0, nudge_x = 5,vjust = -1))    # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
 UK_monthly_house_price_plot
+
 
 # 12.2 UK MoM and YoY average House price change
 Price_change_labels_plot <- Price_change_labels %>%  select(date_fmt,metric,percent)
-
 
 # 12.2.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
 endv_perc_change <- group_by(Price_change_labels, metric) %>% 
@@ -364,7 +362,7 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   geom_line() +
   # Adding end value metric dot shape and label
   geom_point(data = endv_perc_change, col = 'darkgray') +
-  geom_text(data = endv_perc_change, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  geom_text(data = endv_perc_change, aes(label = percent), hjust = -0.2, nudge_x = 2) +
   labs(title ="UK Average house prices show positive growth from last year small drop. July 2011-July 2025",
        subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
        # Change X and Y axis labels
@@ -373,9 +371,10 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_bw() + 
   geom_hline(yintercept = 0, linewidth = 0.3)  +        # Add reference line at 0
-  theme(
-    legend.position = c(.20,+.80),
-    legend.title=element_blank()) # removed legend title
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(), # Remove x axis grid 
+        legend.position = c(.20,+.80),
+        legend.title=element_blank()) # removed legend title
 
 UK_House_price_yoy_perc_endv
 
@@ -384,5 +383,5 @@ library(gridExtra)
 GRID_UK_HOUSE_PRICE_PLOT <-grid.arrange(UK_monthly_house_price_plot,UK_House_price_yoy_perc_endv,ncol=2)
 
 
-ggsave(paste0("plots/24_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+ggsave(paste0("plots/23_Average_and_MoM_YoY_UK_Grid_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
