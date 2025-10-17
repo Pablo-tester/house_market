@@ -222,6 +222,7 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
   theme(panel.grid.minor = element_blank(), # Removing minor grid
+        panel.grid.major.x = element_blank(),
         legend.position = c(.88,.15),
         legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
