@@ -347,9 +347,9 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
                              hjust = 1.0, nudge_x = 5,vjust = -1))    # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
 UK_monthly_house_price_plot
 
+
 # 12.2 UK MoM and YoY average House price change
 Price_change_labels_plot <- Price_change_labels %>%  select(date_fmt,metric,percent)
-
 
 # 12.2.1 Compute reference point (latest value) for each series (MoM and YoY percent change)
 endv_perc_change <- group_by(Price_change_labels, metric) %>% 
@@ -362,7 +362,7 @@ UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = 
   geom_line() +
   # Adding end value metric dot shape and label
   geom_point(data = endv_perc_change, col = 'darkgray') +
-  geom_text(data = endv_perc_change, aes(label = percent), hjust = -0.4, nudge_x = 2) +
+  geom_text(data = endv_perc_change, aes(label = percent), hjust = -0.2, nudge_x = 2) +
   labs(title ="UK Average house prices show positive growth from last year small drop. July 2011-July 2025",
        subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
        # Change X and Y axis labels
