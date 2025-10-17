@@ -116,11 +116,6 @@ House_prices_FIRST_HALF_DATE_FMTD <- fixing_time_period_04_FIRST_HALF %>%
                                       select("date_fmt","united_kingdom","great_britain","england","wales","scotland","northern_ireland_note_3","north_east","north_west",
                                              "yorkshire_and_the_humber", "east_midlands","west_midlands","east","london","south_east","south_west")
 
-rm(fixing_time_period_01_FIRST_HALF,
-   fixing_time_period_02_FIRST_HALF,
-   fixing_time_period_03_FIRST_HALF )
-
-
 # 4 Second_section_data_raws_163_175
 # 4.1 Create new date_fmtd variables in First_section_data_raws_01_165 dataframe
 library(stringr)
@@ -226,8 +221,9 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_color_viridis(discrete=TRUE) +
   theme_bw() + 
-  theme(legend.position = c(.88,.15),
-    legend.title=element_blank()) # removed legend title
+  theme(panel.grid.minor = element_blank(), # Removing minor grid
+        legend.position = c(.88,.15),
+        legend.title=element_blank()) # removed legend title
 UK_monthly_house_price_plot
 
 ggsave(paste0("plots/19_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
