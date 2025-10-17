@@ -319,15 +319,11 @@ UK_House_price_yoy_perc_endv
 ggsave(paste0("plots/20_Average_UK_House_Price_ONS_private_rent_and_house_prices_Jan2011_July2025_end_value.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
 
 # 12. Combining YoY and MoM UK Average House price change with UK Average House price
-
 # Created a grid of 2 columns to display both charts on same png file
-
 # 12.1 UK Monthly House price
-
 # 12.1.1 Including end value
 UK_House_price_latest_value <- UK_House_price_fmted  %>%  select(date_fmt,united_kingdom)
 endv <- UK_House_price_latest_value %>% filter(date_fmt == max(date_fmt))
-
 
 UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date_fmt, y =united_kingdom )) + 
   geom_line(color = "mediumpurple2") +
@@ -343,15 +339,12 @@ UK_monthly_house_price_plot <- ggplot(data = UK_House_price_fmted, aes( x = date
         panel.grid.major.x = element_blank(), # Remove x axis grid 
         legend.position = c(.88,.15),
         legend.title=element_blank()) +  # removed legend title
-  # Introduce Latest UK House price value label 
-  # First I include a dot at the end of the existing geom_line chart
+  #  Introduce Latest UK House price value label .First I include a dot at the end of the existing geom_line chart
   geom_point(data = endv, col = 'mediumpurple2') +
   # End value label (date and value)
-  # This is the date label
   geom_text(data = endv, aes(label = date_fmt), hjust =1.6, nudge_x = 5,vjust = 1.0) +
-  # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
   geom_text(data = endv, aes(label = paste0("Most recent value (dot): ",format( united_kingdom, big.mark = ",", scientific = FALSE)), 
-                             hjust = 1.0, nudge_x = 5,vjust = -1)) 
+                             hjust = 1.0, nudge_x = 5,vjust = -1))    # Include thousands separator UK House price> format(income, big.mark = "'", scientific = FALSE)
 UK_monthly_house_price_plot
 
 # 12.2 UK MoM and YoY average House price change
