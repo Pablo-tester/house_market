@@ -1,11 +1,21 @@
 # house_market
 House prices data analysis and visualisations 
 
-House market data source:  ONS. UK House Price Index.
+## Latest Official Publication about House Prices in the UK 
 
-Latest data release: UK House Price Index: September 2023
-Monthly house price inflation in the UK, calculated using data from HM Land Registry, Registers of Scotland, and Land and Property Services Northern Ireland.
-<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023>
+New Private rent and house prices, UK. Most up to date House and rent prices.
+Latest release 22 October 2025. Next release: 19 November 2025.
+Private rent and house prices, UK: October 2025
+The Price Index of Private Rents (PIPR) measures private rent inflation for new and existing tenancies. The UK House Price Index measures house price inflation.
+House market data source:  ONS. UK House Price Index.
+<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025#uk-private-rent-and-house-prices>
+
+- This new Publication replaces previous one UK House Price Index: December 2023
+The UK House Price Index was discontinutes on December 2023, as can be read on the official ONS publication websiet:
+<img width="974" height="463" alt="image" src="https://github.com/user-attachments/assets/08e90a67-143f-4aef-b977-a0268238f8ed" />
+
+<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/december2023>
+
 
 ## Aim
 Using Pablo-tester account build some charts and analysis of the Housing market using R Git and GitHub
