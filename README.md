@@ -8,6 +8,9 @@ Latest release 22 October 2025. Next release: 19 November 2025.
 Private rent and house prices, UK: October 2025
 The Price Index of Private Rents (PIPR) measures private rent inflation for new and existing tenancies. The UK House Price Index measures house price inflation.
 House market data source:  ONS. UK House Price Index.
+<img width="1021" height="889" alt="image" src="https://github.com/user-attachments/assets/175cc3cf-9316-49a1-990b-4a1db5d54484" />
+
+
 <https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025#uk-private-rent-and-house-prices>
 
 - This new Publication replaces previous one UK House Price Index: December 2023
