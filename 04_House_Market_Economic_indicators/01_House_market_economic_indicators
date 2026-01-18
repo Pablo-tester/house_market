@@ -1,2 +1,17 @@
 # This folder will include Economic indicators related to the House market data
 # Inflation, BdE Interest rates, UK salaries growth rate, UK GDP, UK GDP per head
+
+
+UK
+Update Inflation using latest CPI and CPIH figures from ONS
+• CPI Annual Rate 00: All items 2015=100. For international comparisons
+https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23
+• CPIH, CPI and OOH
+https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/august2025
+• BoE Interest rates
+https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate
+• ONS. Median income
+https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/bulletins/householddisposableincomeandinequality/financialyearending2024
+• ONS. House affordability in England and Wales: 2024
+https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2024
+
