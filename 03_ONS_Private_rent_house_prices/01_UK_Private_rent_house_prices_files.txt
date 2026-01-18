@@ -1,0 +1,8 @@
+Private rent and House prices, UK
+
+- Latest release: December 2025
+
+https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/december2025
+
+- 1.1 Downloaded data from Figure 1. UK rent and house price annual inflation slowed
+- File: "File: Figure_1__UK_rents_and_house_price_annual_inflation_slowed_.xls"
