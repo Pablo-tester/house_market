@@ -1,4 +1,4 @@
-# Script: 10_Load new private and house prices ONS publication.R
+# Script: 01_ONS_private_rent_and_house_prices_data.R
 
 #  - Private rent and house prices, UK: September 2025. (This is the latest release):
 #  https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/september2025

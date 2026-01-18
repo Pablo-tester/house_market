@@ -1,0 +1,12 @@
+## 002 ONS UK House price index (HPI)
+# Website:
+# data files: 
+
+# Main URL: 
+https://www.gov.uk/government/statistical-data-sets/uk-house-price-index-data-downloads-august-2025
+
+# Individual attributed files: 
+- Downloaded files:
+    • Average pice(CSV.72KB)
+    • Average price by property type (CSV.15.5KB)
+    • Average price seasonally adjusted (CSV, 208KB)
