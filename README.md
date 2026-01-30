@@ -1,25 +1,3 @@
-# house_market
-House prices data analysis and visualisations 
-
-## Latest Official Publication about House Prices in the UK 
-
-New Private rent and house prices, UK. Most up to date House and rent prices.
-Latest release 22 October 2025. Next release: 19 November 2025.
-Private rent and house prices, UK: October 2025
-The Price Index of Private Rents (PIPR) measures private rent inflation for new and existing tenancies. The UK House Price Index measures house price inflation.
-House market data source:  ONS. UK House Price Index.
-<img width="1021" height="889" alt="image" src="https://github.com/user-attachments/assets/175cc3cf-9316-49a1-990b-4a1db5d54484" />
-
-
-<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025#uk-private-rent-and-house-prices>
-
-- This new Publication replaces previous one UK House Price Index: December 2023
-The UK House Price Index was discontinutes on December 2023, as can be read on the official ONS publication websiet:
-<img width="974" height="463" alt="image" src="https://github.com/user-attachments/assets/08e90a67-143f-4aef-b977-a0268238f8ed" />
-
-<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/december2023>
-
-
 ## Aim
 Using Pablo-tester account build some charts and analysis of the Housing market using R Git and GitHub
 
@@ -33,17 +11,27 @@ Using Pablo-tester account build some charts and analysis of the Housing market 
 
 All this analysis will be done in a dedicated R project using Git and GitHub for version control, adding new analytical features as new branches to main using my local repo as Pablo-tester. 
 
-
 ### Using trunk development to add new features
 
 In this project I use trunk-based development to add features to the main branch. Pablo-tester GitHub account creates the features and  Pablo-source GitHub accounts reviews and approves the changes applied.
 ![Git_commit_branch_ahead](https://github.com/Pablo-tester/house_market/assets/140793883/532ed3d0-1bae-435c-b1ac-26dbe3a42303)
 
-Adding chages from Git to GitHub
+## Latest Official Publication about House Prices in the UK 
 
-![Close_issue_from_terminal](https://github.com/Pablo-tester/house_market/assets/140793883/3f86debc-e58e-4ca1-afd2-091cc9149fec)
+New Private rent and house prices, UK. Most up to date House and rent prices.
+Latest release 22 October 2025. Next release: 19 November 2025.
+Private rent and house prices, UK: October 2025
+The Price Index of Private Rents (PIPR) measures private rent inflation for new and existing tenancies. The UK House Price Index measures house price inflation.
+House market data source:  ONS. UK House Price Index.
+<img width="1021" height="889" alt="image" src="https://github.com/user-attachments/assets/175cc3cf-9316-49a1-990b-4a1db5d54484" />
 
-Closing issues as I push the fix, referencing issue number in commit message
+<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025#uk-private-rent-and-house-prices>
+
+- This new Publication replaces previous one UK House Price Index: December 2023
+The UK House Price Index was discontinutes on December 2023, as can be read on the official ONS publication websiet:
+<img width="974" height="463" alt="image" src="https://github.com/user-attachments/assets/08e90a67-143f-4aef-b977-a0268238f8ed" />
+
+<https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/december2023>
 
 ## 1. Exploratory data analysis 
 
@@ -75,6 +63,13 @@ Updated previous chart with ONS UK House Price Index. Latest available data from
 Updated charts for UK Average house prices and MoM and YoY percent change. Source: ONS UK House Price Index. Jan 2011- July 2025 period. September 2025 data. 
 
 <img width="1774" height="846" alt="image" src="https://github.com/user-attachments/assets/92c0adce-4a22-4143-b75d-2e102b5bb987" />
+
+### 1.2 UK House Price Index - Average House Prices
+
+- The UK House Price Index (HPI), from gov.uk website: <https://www.gov.uk/government/statistical-data-sets/uk-house-price-index-data-downloads-august-2025>. Provides monthly  **Average house prices** time series data from **1968** up to **August 2025**, and it offers these series from the Land Registration Data:
+- Average-prices-2025-08.csv
+- Average-price-seasonally-adjusted-2025-08.csv
+- Average-price-Property-Type-2025-08.csv
 
 
 ## 2. Univariate TS modelling using TSstudio
