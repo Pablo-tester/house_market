@@ -1,0 +1,5 @@
+1.  Estimates are not seasonally adjusted. 
+
+2.  The [HMLR's UK House Price Index (HPI) release on GOV.UK ](https://www.gov.uk/government/collections/uk-house-price-index-reports)is available to download. 
+
+3.  Volatility in 2021 and 2022 reflects house price movements around changes in Stamp Duty Land Tax in 2021.
