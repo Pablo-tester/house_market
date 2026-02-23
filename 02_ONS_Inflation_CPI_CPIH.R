@@ -41,7 +41,9 @@ head(CPI_yearly_data)
 str(CPI_yearly_data)
 
 Min_period <- CPI_yearly_data %>% select(date) %>% min()
+# [1] 1989
 Max_period <- CPI_yearly_data %>% select(date) %>% max()
+# [1] 2023
 
 # 2.1 CPI Exploratory plot
 # Initial exploratory plot CPI data. 
@@ -51,22 +53,21 @@ cpi_endv <- CPI_yearly_data %>%
   filter(date == max(date)) 
 cpi_endv
 
-UK_House_price_yoy_perc_endv <-ggplot(data = Price_change_labels_plot, aes( x = date_fmt, y = percent, color = metric )) +   
-  geom_line() +
+UK_CPI_yearly_plot <-ggplot(data = CPI_yearly_data, aes( x = date, y = CPI)) +   
+  geom_line(color = "orange") +
   # Adding end value metric dot shape and label
-  geom_point(data = endv, col = 'darkgray') +
-  geom_text(data = endv, aes(label = percent), hjust = -0.4, nudge_x = 2) +
-  labs(title ="UK Average house prices into reverse from last year all time high. July 2011-July 2025",
-       subtitle = "UK YoY percent price change.Source: ONS UK House Price Index. September 2025 data",
-       # Change X and Y axis labels
-       x = "Year", y = "House price change (%)" ) +
-  scale_y_continuous(breaks = seq(-16,16, by = 2)) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  theme_bw() + 
-  geom_hline(yintercept = 0, linewidth = 0.3)  + # Add reference line at 0
-  theme(
-    panel.grid.minor = element_blank(), # Removing minor grid
-    panel.grid.major.x = element_blank(), # Remove x axis grid 
-    legend.position = c(.90,+.80),
-    legend.title=element_blank()) # removed legend title
-UK_House_price_yoy_perc_endv
+  geom_point(data = cpi_endv, col = 'darkgray') +
+  geom_text(data = cpi_endv, aes(label = CPI), hjust = +0.9, nudge_x = 2) +
+  labs(title ="UK Inflaction CIP Index. 1989-2023",
+       subtitle = "UK Inflation CPI yearly data. Source:ONS economy,inflation and price indices") +
+theme_bw() +
+  geom_hline(yintercept = 0, linewidth = 0.3) +   # Add reference line at 0
+theme(                                            # Add theme to plot
+  panel.grid.major.x = element_blank(), # Remove x axis grid 
+  legend.position = c(.90,+.80),
+  legend.title=element_blank()) # removed legend title
+UK_CPI_yearly_plot
+
+# Save CPI plot
+ggsave(paste0("Economic_indicators_plots/01_UK_CPI_index_yearly_data_1989_2023_period.jpeg"),width = 30, height = 20, dpi = 150, units = "cm")
+
