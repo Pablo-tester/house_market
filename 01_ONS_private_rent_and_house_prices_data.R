@@ -183,6 +183,8 @@ max_date <- max(UK_House_price_fmted$date_fmt)
 # Setup color palette manually
 # scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
 # install.packages("viridis",dependencies = TRUE)
+# install.packages("wesanderson", dependencies = TRUE)
+
 library(wesanderson) #  blog Wes Anderson Palettes.  https://github.com/karthik/wesanderson
 library(viridis)
 
