@@ -144,7 +144,7 @@ Inflation_plot_colour_manual <- Inflation_plot_data %>%
   ggplot( fill = Indicator) +
   geom_line(aes(datef, value, colour = Indicator, group = Indicator )) +
   theme_light() +
-  labs(title = "UK Inflation measures - December 2025",
+  labs(title = "UK Inflation indicators - December 2015-2025 period - Latest data: December 2025",
        subtitle ="CPI: Consumer Prices Index, CPIH: Consumer Prices Index including owner occupiers' housing costs, OOH: Owner Occupiers' Housing Costs",
        caption = "ONS: Consumer price inflation, UK: December 2025:https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
        y = NULL,colour = NULL, fill = NULL) +
@@ -153,5 +153,5 @@ Inflation_plot_colour_manual <- Inflation_plot_data %>%
                       labels = c("cpi","cpih","ooh"))
 Inflation_plot_colour_manual
 
-ggsave("plots/03_UK_inflation_indicators_custom_colours.png", width = 10, height = 4)
+ggsave("Economic_indicators_plots/03_UK_inflation_indicators_custom_colours.png", width = 10, height = 4)
 
