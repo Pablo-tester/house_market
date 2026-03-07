@@ -92,30 +92,28 @@ Inflation_inc_dates <- Inflation_rates_long %>%
                       mutate(datef = as.Date(date_comb, format ="%d/%b/%Y"))
 Inflation_inc_dates
 
-# 7. Inflation dataframe for plots with formatted daet
+# 7. Inflation data frame for plots with formatted date
 
 Inflation_plot_data <- Inflation_inc_dates %>% select(datef,Indicator,value) 
 Inflation_plot_data
 
 # 8. Subset each indicator
 
-
 # 8 PLOT
-
 # 8.1 All three Inflation measures combined
 #  aes(colour = Indicator, group = Indicator)
 Inflation_plot_single <- Inflation_plot_data %>% 
   ggplot() +
   geom_line(aes(datef, value, colour = Indicator, group = Indicator)) +
   theme_light() +
-  labs(title = "UK Inflation measures - December 2025",
+  labs(title = "UK Inflation measures - December 2015-2025 period - Latest data: December 2025",
        subtitle ="CPI: Consumer Prices Index, CPIH: Consumer Prices Index including owner occupiers' housing costs, OOH: Owner Occupiers' Housing Costs",
        caption = "ONS: Consumer price inflation, UK: December 2025:https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
        y = NULL,colour = NULL, fill = NULL) 
   
 Inflation_plot_single
 
-ggsave("plots/01_UK_inflation_indicators_.png", width = 10, height = 4)
+ggsave("Economic_indicators_plots/01_UK_inflation_indicators_CPI_CPIH_OOH.png", width = 10, height = 4)
 
 # 8.2 Each indicator on a different pane
 Inflation_plot_panel <-  Inflation_plot_data %>% 
