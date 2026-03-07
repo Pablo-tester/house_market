@@ -106,7 +106,7 @@ Inflation_plot_single <- Inflation_plot_data %>%
   ggplot() +
   geom_line(aes(datef, value, colour = Indicator, group = Indicator)) +
   theme_light() +
-  labs(title = "UK Inflation measures - December 2015-2025 period - Latest data: December 2025",
+  labs(title = "UK Inflation indicators - December 2015-2025 period - Latest data: December 2025",
        subtitle ="CPI: Consumer Prices Index, CPIH: Consumer Prices Index including owner occupiers' housing costs, OOH: Owner Occupiers' Housing Costs",
        caption = "ONS: Consumer price inflation, UK: December 2025:https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
        y = NULL,colour = NULL, fill = NULL) 
@@ -121,13 +121,13 @@ Inflation_plot_panel <-  Inflation_plot_data %>%
   geom_line(aes(datef,value,colour = Indicator, group = Indicator)) +
   facet_wrap(~ Indicator, nrow = 2) +
 theme_light() +
-  labs(title = "UK Inflation measures - December 2025",
+  labs(title = "UK Inflation indicators - December 2015-2025 period - Latest data: December 2025",
        subtitle ="CPI: Consumer Prices Index, CPIH: Consumer Prices Index including owner occupiers' housing costs, OOH: Owner Occupiers' Housing Costs",
        caption = "ONS: Consumer price inflation, UK: December 2025:https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
        y = NULL,colour = NULL, fill = NULL) 
 Inflation_plot_panel
 
-ggsave("plots/02_UK_inflation_indicators_facet_plot.png", width = 10, height = 4)
+ggsave("Economic_indicators_plots/02_UK_inflation_indicators_facet_plot.png", width = 10, height = 4)
 
 # 8.3 Single chart with three lines one for each indicator
 #    # Apply legend format here - change default colours to black and blue using "scale_colour_manual()" function.
